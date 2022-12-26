@@ -1,0 +1,40 @@
+Types of Languages --> Procedural
+			     Functional
+			     Object-Oriented
+
+
+Procedural :
+
+- specifies a series of well-structural steps and procedures to compose a program
+- contains a systematic order of statements, functions and commands to complete a task
+
+
+Functional :
+
+- writing a program only in pure functions ie. never modify variables, but only create new ones as an output
+- used in situations where we can perform lots of different operations on the same set of data, like ML
+- first class functions?
+
+
+Object Oriented :
+- revolves around objects
+- code + data = object
+- developed to make it easier to develop, debug, reuse, and maintain software
+
+
+
+Static vs Dynamic Languages -->
+
+Static Languages :
+- perform type checking at compile time
+- errors wll show at compile time
+- declare datatype before you use it
+- more control
+
+
+Dynamic Languages :
+- perform type checking at runtiome
+- error might not show till program is run
+- no need to declare datatype of variables
+- aves time in writing code but might give error at runtime
+
