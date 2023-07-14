@@ -1,0 +1,87 @@
+class Solution {
+    public List<Integer> splitIntoFibonacci(String num) 
+    {
+
+        List<Integer> result = new ArrayList<>();
+
+        solve(num, result, 0);
+        return result;
+
+
+
+
+
+    }
+
+    public boolean solve(String num, List<Integer> result, int index)
+    {
+        int n = num.length();
+        int len = result.size();
+
+
+
+        if(index == n && len >= 3)
+        {
+            return true;
+
+        }
+
+        for(int i = index; i<n; i++)
+        {
+
+            if(num.charAt(index) == '0' && i > index)
+            {
+                // return false
+                break;
+
+            }
+
+            long temp = Long.parseLong(num.substring(index, i+1));
+
+            if(temp > Integer.MAX_VALUE)
+            {
+                break; 
+               // return false;
+
+            }
+
+
+            if(len >= 2 && temp > result.get(len-1) + result.get(len-2))
+            {
+                break;
+
+                //return false;
+            }
+
+            if(len <= 1 || temp == result.get(len-1) + result.get(len-2))
+            {
+
+                result.add((int)temp);
+
+                if(solve(num, result, i+1))
+                {
+                    return true;
+
+                }
+
+               
+               result.remove(result.size() - 1);
+
+            }
+             
+        }
+
+
+        return false;
+
+
+
+
+
+
+
+
+
+
+    }
+}
