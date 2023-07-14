@@ -1,0 +1,66 @@
+class Solution {
+    public int calPoints(String[] operations) 
+    {
+
+        int m = 0, sum = 0;
+
+        int[] record = new int[operations.length];
+
+        for(String ch : operations)
+        {
+
+            switch(ch)
+            {
+
+                case "+" ->
+                {
+                    record[m] = record[m-1] + record[m-2];
+                    m++;
+
+                }
+
+                case "D" ->
+                {
+                    record[m] = record[m-1] * 2;
+                    m++;
+
+                }
+
+                case "C" -> record[--m] = 0;
+
+                default -> 
+                {
+                    record[m] = Integer.parseInt(ch);
+                    m++;
+
+                }
+            }
+
+
+
+        }
+
+        for(int num : record)
+        {
+             sum += num;
+
+        }
+
+        return sum;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+}
