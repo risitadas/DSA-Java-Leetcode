@@ -1,0 +1,84 @@
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) 
+    {
+
+        int n = asteroids.length;
+
+        int i = 0, a=-1;
+
+        for(i=0; i<n;  )
+        {
+            int asteroid = asteroids[i];
+
+            if(a == -1 || asteroid > 0 || asteroids[a] <0)
+            {
+                asteroids[++a] = asteroid;
+                i++;
+
+            }
+            else if(asteroid + asteroids[a] > 0)
+            {
+                i++;
+
+            }
+            else if(asteroid + asteroids[a] <0)
+            {
+                a--;
+            }
+            else if( asteroid + asteroids[a] == 0)
+            {
+                i++; a--;
+
+            }
+            
+        }
+
+        return Arrays.copyOfRange(asteroids, 0, a+1);
+           
+
+
+
+
+
+
+
+        /*
+        Stack<Integer> stk = new Stack<>();
+
+        for (int asteroid : asteroids) 
+        {
+            if (stk.isEmpty() || asteroid > 0 || stk.peek() < 0) 
+            {
+                stk.push(asteroid);
+
+            } 
+            else if (stk.peek() <= -asteroid) 
+            {
+                stk.pop();
+            }
+
+
+
+
+
+
+        }
+
+        int[] result = new int[stk.size()];
+
+        for (int i = stk.size() - 1; i >= 0; i--) 
+        {
+            result[i] = stk.pop();
+        }
+
+        return result;
+
+        */
+
+
+
+
+
+
+    }
+}
