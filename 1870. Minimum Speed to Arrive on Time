@@ -1,0 +1,49 @@
+class Solution {
+    public int minSpeedOnTime(int[] dist, double hour) 
+    {
+
+        int result = -1;
+        int left = 1;
+        int right = (int) 1e7;
+
+        while (left <= right) 
+        {
+            
+            final int mid = (left + right) / 2;
+            
+            if (time(dist, hour, mid) > hour) 
+            {
+                
+                left = mid + 1;
+            } 
+            else 
+            {
+                result = mid;
+                right = mid - 1;
+            }
+        }
+
+        return result;
+
+        
+
+        
+    }
+
+
+    public double time(int[] dist, double hour, int speed) 
+    {
+        double sum = 0;
+        
+        for (int i = 0; i < dist.length - 1; ++i)
+        {
+            sum += Math.ceil((double) dist[i] / speed);
+
+
+        }    
+    
+    
+    return sum + (double) dist[dist.length - 1] / speed;
+  }
+
+}
