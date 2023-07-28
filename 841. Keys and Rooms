@@ -1,0 +1,61 @@
+class Solution {
+
+    void visit(List<List<Integer>> rooms, int i, boolean[] visited)
+    {
+
+        if(visited[i]) return;
+
+        visited[i] = true;
+
+        List<Integer> list = rooms.get(i);
+
+        for(Integer next : list)
+        {
+
+            visit(rooms, next, visited);
+
+        }
+
+
+    }
+
+
+
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) 
+    {
+
+        int n = rooms.size();
+
+        boolean[] visited = new boolean[n];
+
+        visit(rooms, 0, visited);
+
+        int m = 0;
+
+        for(int i = 0; i<n; i++)
+        {
+
+            if(visited[i])
+            {
+                m++;
+
+            }
+        }
+
+        if(m == n)
+        {
+            return true;
+
+        }
+        else
+        {
+            return false;
+
+        }
+
+
+
+
+        
+    }
+}
