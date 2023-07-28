@@ -1,0 +1,67 @@
+class Solution {
+
+
+    public static void calculate(int[][] isConnected, int i)
+    {
+
+        int[] m = isConnected[i];
+
+        if(m[i] == 1)
+        {
+
+            m[i] = 0;
+
+            for(int j = 0; j< m.length; j++)
+            {
+
+                if(m[j] == 1)
+                {
+
+                    m[j] = 0;
+
+                    calculate(isConnected, j);
+
+                }
+            }
+        }
+
+
+
+
+    }
+
+
+
+
+    public int findCircleNum(int[][] isConnected) 
+    {
+
+        int n = isConnected.length;
+
+        int result = 0;
+
+        for(int i=0; i<n; i++)
+        {
+
+            if(isConnected[i][i] == 1)
+            {
+                
+                result++;
+
+                calculate(isConnected, i);
+
+
+
+            }
+
+        }
+
+        return result;
+
+
+        
+    }
+
+
+
+}
