@@ -1,0 +1,51 @@
+class Solution 
+{
+
+    public List<List<Integer>> result = new ArrayList<>();
+
+    public void dfs(int i, int n, int k, List<Integer> dummy) 
+    {
+        
+        
+        if (k == 0) 
+        {
+
+            result.add(new ArrayList<>(dummy));
+
+            return;
+
+
+        }
+
+        if (i > n)
+        {
+            return;
+
+
+        } 
+
+        dfs(i + 1, n, k, dummy);
+        dummy.add(i);
+
+        dfs(i + 1, n, k - 1, dummy);
+        dummy.remove(dummy.size() - 1);
+
+
+    }
+
+
+
+    public List<List<Integer>> combine(int n, int k) 
+    {
+
+
+        List<Integer> dummy = new ArrayList<>();
+
+        dfs(1, n, k, dummy);
+        
+        return result;
+    }
+
+    
+    
+}
