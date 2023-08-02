@@ -1,0 +1,54 @@
+class Solution 
+{
+
+
+    public List<String> letterCombinations(String digits) 
+    {
+        if (digits.isEmpty())
+        {
+
+            return new ArrayList<>();
+        }    
+
+        List<String> result = new ArrayList<>();
+
+        dfs(digits, 0, new StringBuilder(), result);
+        return result;
+
+
+    }
+
+    public static final String[] digitToLetters = {"",    "",    "abc",  "def", "ghi",
+                                                  "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+
+    public  void dfs(String digits, int i, StringBuilder sb, List<String> result) 
+    {
+        if (i == digits.length()) 
+        {
+
+
+            result.add(sb.toString());
+            return;
+        }
+
+        for (final char c : digitToLetters[digits.charAt(i) - '0'].toCharArray()) 
+        {
+            sb.append(c);
+            dfs(digits, i + 1, sb, result);
+            sb.deleteCharAt(sb.length() - 1);
+
+
+        }
+
+
+
+    }
+
+    
+
+
+
+
+
+}
