@@ -1,0 +1,60 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) 
+    {
+
+        ArrayList<List<Integer>> result= new ArrayList<>();
+
+        recursion(0, nums, result);
+        return result;
+
+
+
+    }
+
+    public void recursion(int index, int[] nums, ArrayList<List<Integer>> result)
+    {
+
+
+        int n = nums.length;
+        if(index == n)
+        {
+            ArrayList<Integer> r = new ArrayList<>();
+            for(int i = 0;i<n;i++)
+            {
+                r.add(nums[i]);
+
+            }
+
+            result.add(new ArrayList<>(r));
+            return;
+
+
+
+        }
+
+        for(int i=index;i<n;i++)
+        {
+
+            swap(i, index, nums);
+            recursion(index+1, nums, result);
+            swap(i, index, nums);
+
+        }
+
+
+
+
+
+    }
+
+    public void swap(int i, int index, int[] nums)
+    {
+
+        int dummy = nums[i];
+
+        nums[i] = nums[index];
+        nums[index] = dummy;
+
+    }
+
+}
