@@ -1,4 +1,49 @@
 class Solution {
+
+    static boolean solve(int ind , String s, List<String> wordDict , Boolean dp[])
+    {
+        if(ind >= s.length()) return true;
+
+        if(dp[ind] != null) return dp[ind];
+
+        boolean res = false;
+
+
+        for(String st : wordDict)
+        {
+            int n = st.length();
+            if(s.length() - ind < n) continue;
+
+            if(s.substring(ind , ind + n).equals(st) && solve(ind + n , s , wordDict , dp))
+            {
+
+
+                res = true;
+                break;
+            }
+
+        }
+
+        return dp[ind] = res;
+
+
+    }
+
+
+    public boolean wordBreak(String s, List<String> wordDict) 
+    {
+
+        
+        return solve(0 , s , wordDict , new Boolean[s.length()]);
+    }
+}
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+class Solution {
     public boolean wordBreak(String s, List<String> wordDict) 
     {
     
