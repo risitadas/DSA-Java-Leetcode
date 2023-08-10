@@ -1,0 +1,65 @@
+
+//User function Template for Java
+
+
+class Compute 
+{
+    public long[] minAnd2ndMin(long a[], long n)  
+    {
+        Arrays.sort(a);
+        
+        
+        long first = Long.MAX_VALUE;
+        long second = Long.MAX_VALUE;
+        
+        for(int i = 0; i<n; i++)
+        {
+            
+            if(first > a[i])
+            {
+            
+                second = first;
+                first = a[i];
+                
+                
+            }
+            else if(second  > a[i] && a[i] != first)
+            {
+                
+                second = a[i];
+                
+            }
+            
+            
+        }
+        
+        if(first == Long.MAX_VALUE && second  == Long.MAX_VALUE || 
+           first == Long.MAX_VALUE || second == Long.MAX_VALUE)
+        {
+            long ans[] = {-1l};
+            return ans;
+            
+            
+        }
+        long[] res = new long[2];
+        res[0] = first;
+        res[1] = second;
+        
+        return res;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+}
