@@ -1,0 +1,119 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //System.out.println("devils roll the dice, angels roll their eyes)");
+	 
+	 
+	    Scanner sc = new Scanner(System.in);
+	    
+	    
+	    int num = sc.nextInt();
+	    
+	    for(int i = 0; i <num; i++)
+	    {
+	        int n = sc.nextInt();
+	        int[] arr = new int[n];
+	        
+	        for(int j=0; j< n; j++)
+	        {
+	            arr[j] = sc.nextInt();
+	        }
+	        
+	        sortByFrequency(arr);
+	        
+	        
+	        
+	    }
+	    
+	    sc.close();
+	    
+	    
+	 
+	 
+	 
+	 
+	 
+	 }
+	 
+	 
+	 public static void sortByFrequency(int[] arr)
+	 {
+	     
+	     
+	     HashMap<Integer, Integer> map = new HashMap<>();
+	     
+	     for(int i =0; i< arr.length; i++)
+	     {
+	         
+	         if(map.containsKey(arr[i]))
+	         {
+	             map.put(arr[i], map.get(arr[i]) + 1);
+	             
+	         }
+	         else
+	         {
+	             map.put(arr[i], 1);
+	             
+	         }
+	         
+	         
+	         
+	     }
+	     
+	     ArrayList<Integer> list = new ArrayList<>(map.keySet());
+	     
+	     Collections.sort(list, (a,b) -> {
+	         
+	         if(map.get(a) == map.get(b))
+	         {
+	             return a-b;
+	             
+	         }
+	         else
+	         {
+	             return map.get(b) - map.get(a);
+	             
+	         }
+	         
+	     });
+	     
+	     
+	     int[] result = new int[arr.length];
+	     int index = 0;
+	     
+	     for(int num : list)
+	     {
+	         
+	         for(int i=0;i<map.get(num); i++)
+	         {
+	             result[index++] = num;
+	             
+	         }
+	         
+	     }
+	     
+	     for(int i : result)
+	     {
+	         
+	         System.out.print(i + " ");
+	         
+	     }
+	     System.out.println();
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	     
+	 }
+	 
+	 
+	 
+}
