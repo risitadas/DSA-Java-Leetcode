@@ -1,0 +1,106 @@
+
+//User function Template for Java
+
+
+
+
+
+class Solution {
+    void customSort(int[] arr, int n) 
+    {
+        // code here
+        
+        
+        Arrays.sort(arr, 0, n/2);
+        Arrays.sort(arr, n/2, n);
+        
+        
+        int i=n/2, j= n-1;
+        
+        while(i<j)
+        {
+            
+            int dummy = arr[j];
+            arr[j] = arr[i];
+            arr[i] = dummy;
+            
+            i++; j--;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        int dummy=0;
+        
+        for(int i = 0; i< n-1; i++)
+        {
+            
+            for(int j=0; j<n/2; j++)
+            {
+                
+                if(arr[j] > arr[j+1])
+                {
+                    dummy = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = dummy;
+                    
+                }
+            }
+            
+            
+            for(int j = n/2; j<n-1; j++)
+            {
+                
+                if(arr[j] < arr[j+1])
+                {
+                    
+                    dummy = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = dummy;
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            
+            System.out.print(arr[i] +" ");
+        }
+        
+        
+        */
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+        Arrays.sort(arr);
+        for(int i=0; i<n/2;i++)
+        {
+            
+            System.out.print(arr[i] + " ");
+            
+        }
+        
+        for(int j=n-1; j >= n/2; j--)
+        {
+            
+            System.out.print(arr[j] + " ");
+        }
+        
+        */
+        
+        
+    }
+}
