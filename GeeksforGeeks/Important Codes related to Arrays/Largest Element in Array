@@ -1,0 +1,31 @@
+
+//User function Template for Java
+
+class Compute {
+    
+    public int largest(int arr[], int n)
+    {
+        
+        
+        //Arrays.sort(arr);
+        
+        int max = arr[0];
+        
+        for(int i = 1; i<n; i++)
+        {
+            
+            max = Math.max(max, arr[i]);
+            
+        }
+        
+        return max;
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+}
