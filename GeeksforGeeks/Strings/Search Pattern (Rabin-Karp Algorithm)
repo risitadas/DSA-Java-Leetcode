@@ -1,0 +1,68 @@
+
+//User function Template for Java
+
+class Solution
+{
+    
+    ArrayList<Integer> search(String pat, String S)
+    {
+        // your code here
+        
+        int n = S.length();
+        int m = pat.length();
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        for(int i=0;i<=n-m; i++)
+        {
+            
+            if(charMatch(S, pat, i, m))
+            {
+                list.add(i+1);
+                
+            }
+            
+        }
+        
+        if(list.size() == 0)
+        {
+            list.add(-1);
+            
+        }
+        
+        return list;
+        
+        
+        
+      //  return -1;
+        
+        
+        
+        
+        
+    }
+    
+    
+    public boolean charMatch(String s, String pattern, int i, int m)
+    {
+        
+        for(int j = 0; j<m; j++)
+        {
+            
+            if(pattern.charAt(j) != s.charAt(i+j))
+            {
+                return false;
+                
+            }
+            
+            
+        }
+        
+        return true;
+        
+        
+        
+        
+        
+    }
+}
