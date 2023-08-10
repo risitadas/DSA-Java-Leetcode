@@ -1,0 +1,40 @@
+
+//User function Template for Java
+
+class Solution
+{
+    //text string, pattern string
+    
+    ArrayList<Integer> search(String pat, String S)
+    {
+        // your code here
+        
+        int n = S.length();
+        int m = pat.length();
+        
+       
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        int start=0, end = m;
+        
+        while(end <= n)
+        {
+            String sub=S.substring(start,end);
+            
+            if(sub.equals(pat))
+            {
+                list.add(start+1);
+            }
+            start++;
+            end++;
+        }
+        
+        return list;
+
+        
+        
+        
+        
+    }
+}
