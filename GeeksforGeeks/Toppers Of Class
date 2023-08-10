@@ -1,0 +1,65 @@
+
+
+//User function Template for Java
+
+
+/* class node
+{
+    int marks;
+    int index;
+    public void setMarks(int a)
+    {
+        this.marks=a;
+    }
+    public void setIndex(int b)
+    {
+        this.index=b;
+    }
+}
+*/
+
+class GFG
+{
+    void kTop(node a[],int n)
+    {
+        // Your code goes here
+        
+       // Arrays.sort(a,(x,y)->(y.marks==x.marks)?(x.index-y.index):y.marks-x.marks);
+
+        
+        //Arrays.sort(a,(b, c) -> (c.marks - b.marks));
+        
+
+       PriorityQueue<node> pq = new PriorityQueue<>((c,b)->
+       {
+            if(c.marks!=b.marks)
+            {
+                return b.marks-c.marks;
+            
+            }
+            else
+            {
+                return c.index-b.index;
+            }
+            
+        });
+        
+        
+        for(int i=0;i<n;i++)
+        {
+            pq.add(a[i]);
+        }
+        
+        int j=0;
+        
+        while(!pq.isEmpty())
+        {
+            a[j++]=pq.poll();
+        }
+
+
+  
+    }
+}
+
+
