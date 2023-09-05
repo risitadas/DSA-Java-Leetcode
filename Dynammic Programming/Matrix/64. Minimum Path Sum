@@ -1,0 +1,52 @@
+class Solution {
+
+    int n=0,m=0;
+
+    public int minPathSum(int[][] grid) 
+    {
+
+        n = grid.length;
+        m = grid[0].length;
+
+        int[][] dp = new int[n][m];
+        return dfs(grid, 0, 0, dp);
+        
+        
+    }
+
+    public int dfs(int[][] grid, int i, int j, int[][] dp)
+    {
+
+
+        if(i > n-1 || j > m-1)
+        {
+
+            return Integer.MAX_VALUE;
+
+        }
+
+        if(i == n-1 && j == m-1)
+        {
+            return grid[i][j];
+
+        }
+
+        if(dp[i][j] > 0)
+        {
+            return dp[i][j];
+
+        }
+
+        dp[i][j] = grid[i][j] + Math.min(dfs(grid, i+1, j, dp), dfs(grid, i, j+1, dp));
+
+        return dp[i][j];
+        
+
+
+
+
+
+
+
+    }
+}
