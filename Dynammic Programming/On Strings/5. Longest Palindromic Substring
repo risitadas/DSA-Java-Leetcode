@@ -1,0 +1,54 @@
+class Solution {
+    public String longestPalindrome(String s) 
+    {
+        int n = s.length();
+        if(n == 0)
+        {
+            return s;
+
+        }
+
+        int start = 0, end = 0;
+
+        for(int i=0; i<n; i++)
+        {
+            int len1 = getlongestPalindrome(s, i, i+1);
+            int len2 = getlongestPalindrome(s, i, i);
+            int len = Math.max(len1, len2);
+
+            if(end - start + 1 < len)
+            {
+                start = i-(len-1)/2;
+                end = i+len/2;
+
+            }
+
+        }
+
+        return s.substring(start, end+1);
+
+
+        
+    }
+
+    public int getlongestPalindrome(String s, int i, int j)
+    {
+        int n = s.length();
+
+        if(s == null || i > j)
+        {
+            return 0;
+        }
+
+
+        while(i >=0 && j<n && s.charAt(i) == s.charAt(j))
+        {
+
+            i--; j++;
+
+
+
+        }
+        return j-i-1;
+    }
+}
