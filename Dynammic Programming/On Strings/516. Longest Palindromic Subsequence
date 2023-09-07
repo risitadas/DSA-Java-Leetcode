@@ -1,0 +1,114 @@
+(Runtime 9 ms, Memory 40.5 MB)
+
+class Solution {
+    public int longestPalindromeSubseq(String s) 
+    {
+        int m = s.length(); int max = 0;
+
+        char[] ch = s.toCharArray();
+        int n = ch.length;
+        
+        int[] dp = new int[n];
+        dp[0] = 1;
+
+        for(int i=1; i<n; i++)
+        {
+            dp[i] = 1;
+            max = 0;
+
+            for(int j = i-1; j>=0; j--)
+            {
+
+                int len = dp[j];
+
+                if(ch[i] == ch[j])
+                {
+
+                    dp[j] = 2+max;
+
+                }
+
+                max = Math.max(max, len);
+
+            }
+
+        }
+
+        for(int x : dp)
+        {
+
+            max = Math.max(max, x);
+
+        }
+
+        return max;
+
+
+
+
+
+        
+    }
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+(Runtime 46 ms, Memory 54.5 MB )
+
+
+class Solution {
+    public int longestPalindromeSubseq(String s) 
+    {
+
+
+        int n = s.length();
+        int[][] dp = new int[n][n];
+        dp[n-1][0] = 1;
+
+        for(int i=n-2; i>=0; i--)
+        {
+
+            for(int j = i; j<n; j++)
+            {
+
+                getlongestPalindromeSubseq(i, j, s, dp);
+
+            }
+        }
+
+        return dp[0][n-1];
+
+        
+    }
+
+    public void getlongestPalindromeSubseq(int i, int j, String s, int[][] dp)
+    {
+
+
+        if(s.charAt(i) == s.charAt(j) && (j-i <=2 || dp[i+1][j-1] > 0))
+        {
+
+            if(j-i <=2)
+            {
+                dp[i][j] = j-i+1;
+
+            }
+            else
+            {
+
+                dp[i][j] = dp[i+1][j-1] + 2;
+
+            }
+        }
+        else
+        {
+
+            dp[i][j] = Math.max(dp[i][j-1], dp[i+1][j]);
+
+        }
+
+
+    }
+}
