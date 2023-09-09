@@ -1,0 +1,47 @@
+class Solution {
+    public int lengthOfLIS(int[] nums) 
+    {
+
+        int n = nums.length;
+        int len = 0;
+        int[] arr = new int[n];
+
+        for(int x : nums)
+        {
+
+            int low = 0, high = len;
+
+            while(low != high)
+            {
+                int mid = (low + high)/2;
+
+                if(arr[mid] < x)
+                {
+                    low = mid + 1;
+
+
+                }
+                else
+                {
+                    high = mid;
+
+                }
+            }
+
+            arr[low] = x;
+
+            if(low == len)
+            {
+                len++;
+
+            }
+        }
+
+        return len;
+
+
+
+
+        
+    }
+}
