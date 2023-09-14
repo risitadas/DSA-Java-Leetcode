@@ -1,0 +1,81 @@
+class Solution {
+    public int maxUncrossedLines(int[] nums1, int[] nums2) 
+    {
+
+        int n = nums1.length,  m = nums2.length;
+
+	    int[] dp0 = new int[m + 1];
+	    int[] dp1 = new int[m + 1];
+	    
+        for (int i = 1; i < n + 1; i++) 
+        {
+            for (int j = 1; j < m + 1; j++) 
+            {
+                if (nums1[i - 1] == nums2[j - 1]) 
+                {
+                    dp1[j] = dp0[j - 1] + 1;
+                } 
+                else 
+                {
+	                dp1[j] = Math.max(dp1[j - 1], dp0[j]);
+                }
+            }
+
+            for (int k = 0; k < m + 1; k++) 
+            {
+	            dp0[k] = dp1[k];
+            }
+
+        }
+        
+        return dp1[m];
+
+
+
+        /*
+        int n = nums1.length, m = nums2.length;
+
+        if(n<m)
+        {
+            int[] dummy = nums1;
+            nums1 = nums2;
+            nums2 = dummy;
+
+            n = nums1.length; m = nums2.length;
+
+
+
+        }
+
+        int[] dp = new int[m+1];
+
+        for(int i=1;i <=n; i++)
+        {
+            int prev = 0;
+
+            for(int j=1; j<=m; j++)
+            {
+                int curr = dp[j];
+
+                if(nums1[i-1] == nums2[j-1])
+                {
+                    dp[j] = prev + 1;
+
+                }
+                else
+                {
+                    dp[j] = Math.max(dp[j-1], curr);
+
+                }
+
+                prev = curr;
+
+            }
+        }
+
+        return dp[m];
+
+        */
+        
+    }
+}
