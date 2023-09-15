@@ -1,0 +1,88 @@
+class Solution {
+    public int maxEnvelopes(int[][] envelopes) 
+    {
+        int n = envelopes.length, end = 1;
+
+        Arrays.sort(envelopes, (a,b) -> (a[0] == b[0] ? b[1] - a[1] : a[0] - b[0]));
+
+        int[] dp = new int[n];
+        dp[0] = envelopes[0][1];
+
+        for(int i=1; i<n; i++)
+        {
+            int indx = envelopes[i][1];
+
+            if(dp[end-1] < indx)
+            {
+                dp[end] = indx;
+                end += 1;
+
+            }
+            else
+            {
+                int low = 0, high = end-1;
+                
+                while(low<=high)
+                {
+                    int mid = low+((high-low)>>1);
+                    if(dp[mid]<indx)
+                    {
+                        low = mid+1;
+                    }
+                    else
+                    {
+                        high = mid-1;
+                    }
+                }
+
+                dp[low] = indx;
+
+
+            }
+        }
+
+        return end;
+
+
+        /*
+        int n = envelopes.length;
+        if(envelopes == null || n==0 || envelopes[0] == null || envelopes[0].length != 2)
+        {
+            return 0;
+            
+        }
+
+        Arrays.sort(envelopes, (a,b) -> a[0] == b[0] ? b[1] - a[1] : a[0] - b[0]);
+
+        int[] dp = new int[n];
+        int result = 0;
+
+        for(int[] envelope:envelopes)
+        {
+            int curr = envelope[1];
+
+            int index = Arrays.binarySearch(dp, 0, result, curr);
+            if(index < 0)
+            {
+                index = -index - 1;
+
+            }
+
+            if(index == result)
+            {
+                result++;
+
+            }
+
+            dp[index] = curr;
+        }
+
+        return result;
+
+        */
+
+
+
+        
+    }
+}
