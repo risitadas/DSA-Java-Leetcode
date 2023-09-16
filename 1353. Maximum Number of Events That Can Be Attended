@@ -1,0 +1,97 @@
+class Solution {
+    public int maxEvents(int[][] events) 
+    {
+
+        int n = events.length; int curr = events[0][0];
+
+        if(events == null || n == 0)
+        {
+            return 0;
+        }
+
+        Arrays.sort(events, (a,b) -> a[0] - b[0]);
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        // int curr = events[0][0];
+       // Arrays.sort(events, (a, b) -> (a[0] == b[0]) ? (a[1] - b[1]): (a[0] - b[0]));
+
+       // PriorityQueue<Integer> heap = new PriorityQueue<>((a, b) -> a - b);
+
+        int i=0; int maxEventsToBeAttended = 0, day = 0;
+
+        while(i <n || !pq.isEmpty() )
+        {
+            if(pq.isEmpty())
+            {
+                day = events[i][0];
+
+            }
+
+            while(i<n && day == events[i][0])
+            {
+                pq.add(events[i][1]);
+                i++;
+
+            }
+
+            pq.poll();
+            maxEventsToBeAttended++;
+            day++;
+
+            while(!pq.isEmpty() && pq.peek() < day)
+            {
+                pq.poll();
+
+            }
+        }
+
+        return maxEventsToBeAttended;
+
+
+
+
+
+
+
+
+
+        /*
+
+        int n = events.length;
+        int i=0, maxEventsAttended = 0;
+
+        Arrays.sort(events, Comparator.comparingInt(eventStartDay -> eventStartDay[0]));
+
+
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+
+        for(int day =1; day <= 100000; day++)
+        {
+
+            while( i <n && events[i][0] == day)
+            {
+
+                heap.add(events[i++][1]);
+            }
+
+            while(!heap.isEmpty() && heap.peek() < day)
+            {
+                heap.poll();
+
+            }
+
+            if(!heap.isEmpty())
+            {
+                maxEventsAttended++;
+                heap.poll();
+
+            }
+        }
+
+        return maxEventsAttended;
+
+        */
+        
+    }
+}
