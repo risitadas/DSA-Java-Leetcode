@@ -1,0 +1,86 @@
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) 
+    {
+
+        
+        int n = days.length;
+        int[] dp = new int[n+1];
+
+        Arrays.fill(dp, -1);
+
+        return getmincostTickets(n, days, costs, 0, dp);
+
+
+
+
+
+        /*
+
+        //int[] dp = new int[395];
+        
+        int[] dp = new int[1000];
+        int n = dp.length;
+
+        for(int day : days)
+        {
+            dp[day + 29] = 1;
+
+        }
+
+        for(int i=30; i!=n; i++)
+        {
+            if(dp[i] == 0)
+            {
+                dp[i] = dp[i-1];
+
+            }
+            else
+            {
+                dp[i] = Math.min(Math.min(dp[i-30] + costs[2], dp[i-7] + costs[1]), dp[i-1] + costs[0]);
+
+            }
+        }
+
+        return dp[394];
+
+        */
+        
+    }
+
+    public int getmincostTickets(int n, int[] days, int[] costs, int day, int[] dp)
+    {
+
+        if(day >= n)
+        {
+            return 0;
+        }
+
+        if(dp[day] != -1)
+        {
+            return dp[day];
+        }
+
+        int res1 = costs[0] + getmincostTickets( n , days , costs , day+1 , dp);
+
+        int i;
+
+
+        for( i = day ; i<n && days[i] < days[day] + 7 ;i++);
+       
+            int res2 = costs[1] + getmincostTickets(n , days , costs , i ,dp);
+        
+        for( i = day ; i<n && days[i] < days[day] + 30 ;i++);
+       
+            int res3 = costs[2] + getmincostTickets(n , days , costs , i , dp);
+        
+
+
+        return dp[day] = Math.min(res1 , Math.min(res2 , res3));
+
+
+
+
+
+
+    }
+}
