@@ -1,0 +1,55 @@
+class Solution {
+
+    String s; String t;
+    int n; int m;
+    Integer dp[][];
+
+   
+    public int numDistinct(String s, String t) 
+    {
+
+        this.s = s;
+        this.t = t;
+        this.n = s.length();
+        this.m = t.length();
+        this.dp = new Integer[n][m];
+
+        return getnumDistinct(0, 0);
+
+
+    }
+
+    public int getnumDistinct(int si, int ti)
+    {
+
+        if (si == n || ti == m || n - si < m - ti) 
+        {
+            return ti == m ? 1 : 0;
+        }
+
+        if (ti == m) 
+        {
+            return 1;
+        }
+
+        if (si == n)
+        {
+            return 0;
+        }
+
+        if (dp[si][ti] != null) 
+        {
+            return dp[si][ti];
+        }
+
+        int count = getnumDistinct(si + 1, ti);
+        if (s.charAt(si) == t.charAt(ti)) 
+        {
+            count += getnumDistinct(si + 1, ti + 1);
+        }
+
+        dp[si][ti] = count;
+        return count;
+
+    }
+}
