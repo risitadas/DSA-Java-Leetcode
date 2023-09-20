@@ -1,0 +1,57 @@
+class Solution {
+    public int minOperations(int[] nums, int x) 
+    {
+        int n = nums.length;
+        int target = 0;
+
+        for(int num : nums)
+        {
+            target += num;
+
+        }
+        target = target -x;
+
+        if(target < 0)
+        {
+            return -1;
+
+        }
+
+        int left = 0, curr = 0, maxSubLen = Integer.MIN_VALUE;
+
+        for(int right = 0; right<n; right++)
+        {
+            curr = curr + nums[right];
+
+            while(curr > target)
+            {
+                curr = curr - nums[left];
+                left++;
+
+            }
+
+            if(curr == target)
+            {
+                maxSubLen = Math.max(maxSubLen, right - left + 1);
+
+            }
+        }
+
+        return maxSubLen == Integer.MIN_VALUE ? -1 : n - maxSubLen;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    }
+}
