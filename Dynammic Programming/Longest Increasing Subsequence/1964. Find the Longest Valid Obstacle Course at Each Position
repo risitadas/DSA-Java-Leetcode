@@ -1,0 +1,89 @@
+class Solution {
+
+    public int[] longestObstacleCourseAtEachPosition(int[] obstacles) 
+    {
+        int n = obstacles.length;
+        int[] result = new int[n];
+        int[] st = new int[n];
+
+        int p = 0;
+
+        for(int i = 0; i<n; i++)
+        {
+            if(p == 0 || st[p-1] <= obstacles[i])
+            {
+                st[p++] = obstacles[i];
+                result[i] = p;
+            } 
+            else
+            {
+                int lo = 0, hi = p;
+                while (lo < hi) 
+                {
+                    int mid = (lo+hi)>>1;
+                    if (st[mid] > obstacles[i]) hi = mid;
+                    else lo = mid+1;
+                }
+                st[lo] = obstacles[i];
+                result[i] = lo+1;
+            }
+        }        
+        return result;
+
+
+
+
+
+/*
+        int n = obstacles.length , end = 0;
+        int[] result = new int[n], tails = new int[n];
+        
+        for(int i = 0; i<n; i++)
+        {
+            int lastSubSeq = binarySearch(tails, obstacles[i], end);
+
+            if(lastSubSeq == end)
+            {
+                end++;
+            }
+
+            tails[lastSubSeq] = obstacles[i];
+            result[i] = 1 + lastSubSeq;
+
+        }
+
+        return result;
+
+        */
+
+        
+    }
+
+
+/*
+    public int binarySearch(int[] tails, int curr, int end)
+    {
+        int low = 0, high = end;
+
+        while(low < high)
+        {
+            int mid = (low+high)/2;
+            if(tails[mid] <= curr)
+            {
+                low = mid+1;
+
+            }
+
+            if(tails[mid] > curr)
+            {
+                high = mid;
+            }
+        }
+
+        return high;
+    }
+
+    */
+
+
+}
