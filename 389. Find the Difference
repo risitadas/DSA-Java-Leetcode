@@ -1,0 +1,17 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        
+        int tsum=0;
+
+        for(int tindex = 0; tindex<t.length();tindex++)
+        {
+            tsum += t.charAt(tindex);
+
+        }
+        for(int sindex=0; sindex<s.length(); sindex ++)
+        {
+            tsum -= s.charAt(sindex);
+        }
+        return (char)tsum;
+    }
+}
