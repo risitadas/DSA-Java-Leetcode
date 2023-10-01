@@ -1,0 +1,93 @@
+class Solution {
+    public int minSizeSubarray(int[] nums, int target) 
+    {
+
+        int n = nums.length, sum = 0;
+        
+
+        // for(int i : nums) sum += i;
+        for(int i =0; i<n; i++)
+        {
+            sum = sum + nums[i];
+
+        }
+
+        int m = target/sum;
+        target = target % sum;
+
+        if(target == 0)
+        {
+            return m *n;
+
+        }
+
+        int[] currNums = new int[2*n];
+
+        for(int i=0; i<2*n; i++)
+        {
+            currNums[i] = nums[i %n];
+
+        }
+
+        int min = getMinSlidWindow(currNums, target);
+        if(min == -1)
+        {
+            return -1;
+
+        }
+        return min + (m*n);
+
+
+
+
+
+
+
+
+
+
+
+        
+    }
+
+    public int getMinSlidWindow(int[] nums, int target)
+    {
+
+        int n = nums.length;
+        int low = 0, high = 0, sum = 0, result = Integer.MAX_VALUE;
+
+        while(high < n)
+        {
+
+            sum += nums[high];
+            high++;
+
+            while(sum > target)
+            {
+                sum = sum - nums[low];
+                low++;
+
+            }
+
+            if(sum == target)
+            {
+                result = Math.min(result, high - low);
+
+            }
+        }
+
+        if(result == Integer.MAX_VALUE)
+        {
+            return -1;
+        }
+        else
+        {
+            return result;
+        }
+
+        
+
+
+
+    }
+}
