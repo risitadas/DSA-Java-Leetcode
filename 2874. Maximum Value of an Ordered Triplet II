@@ -1,0 +1,40 @@
+class Solution {
+    public long maximumTripletValue(int[] nums) 
+    {
+
+        int n = nums.length;
+        long maxTripletValue = 0;
+
+        int[] maxLeft = new int[n];
+        maxLeft[0] = nums[0];
+
+        int[] maxRight = new int[n];
+        maxRight[n-1] = nums[n-1];
+
+        
+        for(int i=1; i<n; i++)
+        {
+
+            maxLeft[i] = Math.max(maxLeft[i-1], nums[i]);
+
+
+        }
+
+        for(int j = n-2; j >=0; j--)
+        {
+            maxRight[j] = Math.max(maxRight[j+1], nums[j]);
+        }
+
+        for(int k=1; k<n-1; k++)
+        {
+            long curr = (long)(maxLeft[k-1] - nums[k] ) * maxRight[k+1];
+
+            maxTripletValue = Math.max(maxTripletValue, curr);
+
+        }
+
+        
+        return maxTripletValue;
+        
+    }
+}
