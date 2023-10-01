@@ -1,0 +1,78 @@
+class Solution {
+
+
+    public String reverseWords(String s) 
+    {
+        
+        char c []=s.toCharArray();
+        int n = c.length;
+        int start=0, end=0;
+
+        while(start< n)
+        {
+            while(end< n && c[end]!=' '){
+                end++;
+            }
+
+            reverse(start, end-1, c);
+            start=end+1;
+            end=start;
+        }
+
+        return new String(c);
+    }
+
+
+    public void reverse(int l , int r, char c[])
+    {
+
+        while(l < r)
+        {
+            char temp=c[l];
+            c[l++]=c[r];
+            c[r--]=temp;
+            
+        }
+    }
+
+
+
+
+
+
+    /*
+    public String reverseWords(String s) 
+    {
+
+        Stack<Character> stack = new Stack<>();
+        StringBuilder result = new StringBuilder();
+        
+        for (char c : s.toCharArray()) 
+        {
+            if (c != ' ') 
+            {
+                stack.push(c);
+            } 
+            else 
+            {
+                while (!stack.isEmpty()) 
+                {
+                    result.append(stack.pop());
+                }
+                result.append(' ');
+            }
+        }
+        
+        while (!stack.isEmpty())
+        {
+            result.append(stack.pop());
+        }
+        
+        return result.toString();
+
+
+        
+    }
+
+    */
+}
