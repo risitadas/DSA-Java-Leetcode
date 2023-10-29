@@ -1,0 +1,17 @@
+class Solution {
+    public int poorPigs(int buckets, int minutesToDie, int minutesToTest) 
+    {
+
+
+        int i=0, m = minutesToTest / minutesToDie;
+
+
+        while(Math.pow(m + 1 , i) < buckets)
+        {
+            
+            i++;
+        }
+        return i;
+        
+    }
+}
