@@ -1,0 +1,41 @@
+class Solution {
+    public int getWinner(int[] arr, int k) 
+    {
+        int n = arr.length;
+        int curr = arr[0], wins = 0;
+
+
+        for(int i=1; i<n; i++)
+        {
+            if(curr > arr[i])
+            {
+                wins++;
+            }
+            else
+            {
+                curr = arr[i];
+                wins = 1;
+
+            }
+
+            if(wins == k)
+            {
+                return curr;
+
+            }
+        }
+
+        return curr;
+
+         
+
+
+
+
+
+
+
+
+        
+    }
+}
