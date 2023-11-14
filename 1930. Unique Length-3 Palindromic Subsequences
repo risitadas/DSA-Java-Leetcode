@@ -1,0 +1,40 @@
+class Solution {
+    public int countPalindromicSubsequence(String s) 
+    {
+        int n = s.length();
+
+    int result = 0;
+    int[] first = new int[26];
+    int[] last = new int[26];
+
+    Arrays.fill(first, n);
+
+    for (int i = 0; i < n; ++i) 
+    {
+      int index = s.charAt(i) - 'a';
+      first[index] = Math.min(first[index], i);
+      last[index] = i;
+    }
+
+    for (int i = 0; i < 26; ++i)
+    {
+        if (first[i] < last[i])
+        {
+          result += s.substring(first[i] + 1, last[i]).chars().distinct().count();
+          
+        }
+    }
+
+    return result;
+
+
+
+
+
+
+
+
+
+        
+    }
+}
