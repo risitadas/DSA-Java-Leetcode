@@ -1,0 +1,21 @@
+class Solution {
+    public int countHomogenous(String s) 
+    {
+
+    final int kMod = 1_000_000_007;
+    int result = 0, count = 0;
+    char currentChar = '@';
+
+    for (final char c : s.toCharArray()) 
+    {
+      count = c == currentChar ? count + 1 : 1;
+      currentChar = c;
+      result += count;
+      result %= kMod;
+    }
+
+    return result;
+
+        
+    }
+}
