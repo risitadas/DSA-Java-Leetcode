@@ -1,0 +1,109 @@
+class Solution {
+
+    boolean hasG = false, hasP = false, hasM = false;
+
+    public int garbageCollection(String[] garbage, int[] travel) {
+        int n = garbage.length;
+        int ans = 0;
+        for (int i = 0; i < n - 1; i++) {
+            ans += 3 * travel[i];
+        }
+        for (String s : garbage) {
+            ans += s.length();
+        }
+        for (int i = n - 1; i > 0; i--) {
+            if (!garbage[i].contains("G")) {
+                ans -= travel[i - 1];
+            } else {
+                break;
+            }
+        }
+        for (int i = n - 1; i > 0; i--) {
+            if (!garbage[i].contains("P")) {
+                ans -= travel[i - 1];
+            } else {
+                break;
+            }
+        }
+        for (int i = n - 1; i > 0; i--) {
+            if (!garbage[i].contains("M")) {
+                ans -= travel[i - 1];
+            } else {
+                break;
+            }
+        }
+        return ans;
+    }
+
+
+
+
+    /*
+    public int garbageCollection(String[] garbage, int[] travel) 
+    {
+        int n = travel.length, ans = 0;
+
+        for (String g : garbage) 
+        {
+            ans += g.length();
+        }
+
+        boolean m = false, p = false, g = false;
+
+        for (int i = n; i > 0; i--) 
+        {
+            m = m || garbage[i].contains("M");
+            p = p || garbage[i].contains("P");
+            g = g || garbage[i].contains("G");
+
+            ans += travel[i-1] * ((m ? 1 : 0) + (p ? 1 : 0) + (g ? 1 : 0));
+        }
+
+        return ans;      
+
+
+
+
+        /*
+        int[] prefix = new int[n];
+        prefix[0] = travel[0];
+
+        for (int i = 1; i < n; ++i)
+        {
+            prefix[i] += prefix[i - 1] + travel[i];
+        }
+        
+         int timeM = getgarbageCollectionTime(garbage, prefix, 'M');
+         int timeP = getgarbageCollectionTime(garbage, prefix, 'P');
+         int timeG = getgarbageCollectionTime(garbage, prefix, 'G');
+        
+        return timeM + timeP + timeG;
+
+        */
+    /*
+
+    }
+*/
+
+/*
+    int getgarbageCollectionTime(String[] garbage, int[] prefix, char c) 
+    {
+        int n = garbage.length, characterCount = 0, lastIndex = -1;
+        
+        for (int i = 0; i < n; ++i) 
+        {
+            final String s = garbage[i];
+            
+            if (s.chars().anyMatch(g -> g == c))
+            {
+                lastIndex = i;
+            }
+            
+            characterCount += (int) s.chars().filter(g -> g == c).count();
+        }
+        
+        return characterCount + (lastIndex <= 0 ? 0 : prefix[lastIndex - 1]);
+  }
+  */
+
+}
