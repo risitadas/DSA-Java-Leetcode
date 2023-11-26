@@ -1,0 +1,74 @@
+class Solution {
+    public int largestSubmatrix(int[][] matrix) 
+    {
+
+        int m = matrix.length, n = matrix[0].length, result = 0;
+        for (int i = 1; i < m; i++) 
+        {
+            for (int j = 0; j < n; j++) 
+            {
+                if (matrix[i][j] == 1) 
+                {
+                    matrix[i][j] = matrix[i - 1][j] + 1;
+                }
+
+            }
+
+        }
+
+
+        for (var row : matrix) 
+        {
+            Arrays.sort(row);
+
+            for (int j = n - 1, k = 1; j >= 0 && row[j] > 0; j--, k++) 
+            {
+                int s = row[j] * k;
+                result = Math.max(result, s);
+            
+            }
+
+        }
+        
+        return result;
+
+
+
+/*
+    int n = matrix[0].length, result = 0;
+    int[] hist = new int[n];
+
+    for (int[] row : matrix) 
+    {
+      for (int i = 0; i < n; i++)
+      {
+          hist[i] = row[i] == 0 ? 0 : hist[i] + 1;
+
+      }
+
+      int[] sortedHist = hist.clone();
+      Arrays.sort(sortedHist);
+
+      for (int i = 0; i < n; ++i)
+      {
+          result = Math.max(result, sortedHist[i] * (n - i));
+
+      }
+
+
+    }
+
+    return result;
+
+    */
+
+
+
+
+
+
+
+
+        
+    }
+}
