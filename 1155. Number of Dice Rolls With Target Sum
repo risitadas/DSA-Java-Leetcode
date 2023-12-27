@@ -1,0 +1,29 @@
+class Solution {
+    int MOD = 1_000_000_007;
+
+    public int numRollsToTarget(int n, int k, int target) 
+    {
+
+    int[] dp = new int[target + 1];
+    dp[0] = 1;
+
+    while (n-- > 0) 
+    {
+      int[] curr = new int[target + 1];
+      for (int i = 1; i <= k; ++i)       
+        for (int t = i; t <= target; ++t) 
+        { 
+          curr[t] += dp[t - i];
+          curr[t] %= MOD;
+
+        }
+
+      dp = curr;
+    }
+
+
+    return dp[target];
+
+        
+    }
+}
