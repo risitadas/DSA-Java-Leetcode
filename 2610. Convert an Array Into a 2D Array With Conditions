@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> findMatrix(int[] nums)
+    {
+
+        int n = nums.length;
+        ArrayList<List<Integer>> result = new ArrayList<>();
+        int[] count = new int[n + 1];
+
+        for (final int num : nums) 
+        {
+          if ( ++count[num] > result.size())
+          {
+              result.add(new ArrayList<>());
+          }
+           
+          result.get(count[num] - 1).add(num);
+        }
+
+    return result;
+
+    }
+
+}
