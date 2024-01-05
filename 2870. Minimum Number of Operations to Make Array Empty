@@ -1,0 +1,75 @@
+class Solution {
+    public int minOperations(int[] nums) 
+    {
+
+        Arrays.sort(nums);
+
+        int n = nums.length, result = 0, i= 0;
+        while(i <n)
+        {
+            int j = i;
+            
+            while(j < n && nums[j] == nums[i]) 
+            {
+                j++;
+            }
+
+            int count = j-i;
+            if(count == 1)
+            {
+                 return -1;
+            }
+
+            result += count/3;
+
+            if(count%3 != 0) 
+            {
+                result++;
+
+                
+            }
+
+            i=j;
+        }
+        return result;
+
+
+
+
+
+/*
+
+    int result = 0;
+    HashMap<Integer, Integer> count = new HashMap<>();
+
+    for (int num : nums)
+    {
+        count.merge(num, 1, Integer::sum);
+
+    }
+
+    for (int freq : count.values()) 
+    {
+
+
+      if (freq == 1)
+      {
+          return -1;
+      }
+
+      result += (freq + 2)/3;
+
+    }
+
+    return result;
+
+
+
+*/
+
+
+
+
+        
+    }
+}
