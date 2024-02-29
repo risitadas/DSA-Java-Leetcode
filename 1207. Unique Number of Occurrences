@@ -1,0 +1,60 @@
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) 
+    {
+
+        int[] freq = new int[2001];
+        boolean[] occured = new boolean[2001];
+
+        for(int i:arr)
+        {
+            freq[i+1000]++;
+        }
+
+        for(int i: arr)
+        {
+            int val = freq[i+1000];
+            freq[i+1000]=0;
+            
+            if(val>0)
+            {
+                if(occured[val]==true)
+                {
+                    return false;
+
+                }
+                else 
+                {
+                    occured[val]=true;
+                }
+            }
+        }
+        return true;
+
+
+        /*
+
+        HashMap<Integer, Integer> count = new HashMap<>();
+        HashSet<Integer> occurrences = new HashSet<>();
+
+        for(int a : arr)
+        {
+            count.merge(a, 1, Integer::sum);
+
+        }
+
+        for(int value : count.values())
+        {
+            if (!occurrences.add(value))
+            {
+                return false;
+
+            }
+
+        }
+
+        return true;
+*/
+
+        
+    }
+}
