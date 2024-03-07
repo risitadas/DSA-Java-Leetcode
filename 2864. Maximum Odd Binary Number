@@ -1,0 +1,35 @@
+class Solution {
+    public String maximumOddBinaryNumber(String s) 
+    {
+
+        char[] arr = s.toCharArray();
+        int len = arr.length;
+        Arrays.sort(arr);
+
+        int ele = len - 2;
+
+
+        for(int i=0; i < len/2; i++)
+        {
+            char temp = arr[i];
+            arr[i]=arr[ele - i];
+            arr[ele - i]=temp;
+            
+        }
+        return new String(arr);
+
+
+
+
+/*
+         int zeros = (int) s.chars().filter(c -> c == '0').count();
+         int ones = s.length() - zeros;
+
+
+
+         return "1".repeat(ones - 1) + "0".repeat(zeros) + "1";
+*/
+
+         
+    }
+}
