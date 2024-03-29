@@ -1,0 +1,66 @@
+class Solution {
+    public int maxFrequencyElements(int[] nums) 
+    {
+
+        int max=0; int result = 0;
+        int [] freq=new int[101];
+
+        for(int i: nums) 
+        {
+            freq[i]++;
+
+        }
+
+        for(int i : freq)
+        {
+            max=Math.max(max,i);
+
+        }
+
+        
+
+        for(int i : freq)
+        {
+            if(i == max)
+            {
+                 result+=i;
+
+            }
+        }
+
+    
+
+
+        return result;
+
+
+/*
+        int result = 0, kMax = 100;
+        int[] count = new int[kMax + 1];
+
+        for (int num : nums)
+        {
+            count[num]++;
+
+        }
+
+        int maxFreq = Arrays.stream(count).max().getAsInt();
+
+        for (int freq : count)
+        {
+            if (freq == maxFreq)
+            {
+                result += maxFreq;
+                
+            }
+
+
+        }
+
+        return result;
+*/
+
+
+        
+    }
+}
