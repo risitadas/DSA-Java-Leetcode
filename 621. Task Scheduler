@@ -1,0 +1,100 @@
+class Solution {
+    public int leastInterval(char[] tasks, int n) 
+    {
+
+        int[] freq = new int[26];
+
+        for(int i=0; i<tasks.length; i++)
+        {
+
+            freq[tasks[i]-'A']++; 
+
+        }
+
+
+        int max = 0;
+        int count = 0;
+
+        for(int i=0; i<26; i++)
+        {
+            max = Math.max(max, freq[i]);
+
+        }
+        for(int i=0; i<26; i++)
+        {
+            if(freq[i] == max) 
+            {
+                count++;
+                
+            }
+        }
+
+        return Math.max(((n+1)*(max-1)) + count, tasks.length);
+
+
+
+
+
+
+
+/*
+
+        int[] freq = new int[26];
+        int max = 0, maxCount = 0;
+
+
+        for(char task : tasks) 
+        {
+            freq[task-'A']++;
+
+            if(max==freq[task-'A']) 
+            {
+            
+                maxCount++;
+            }
+            else if(max < freq[task -'A']) 
+            {
+
+                max = freq[task-'A'];
+                maxCount = 1;
+
+
+            }
+
+
+        }
+
+        int gapCount = max - 1;
+        int gapLength = n -(maxCount - 1);
+        int empty = gapCount * gapLength;
+        int availableTasks = tasks.length - max*maxCount;
+        int idles = Math.max(0, empty - availableTasks);
+
+        return tasks.length + idles;
+
+*/
+
+/*
+        int[] count = new int[26];
+
+        for(char task : tasks)
+        {
+            count[task - 'A']++;
+
+        }
+
+        int maxFreq = Arrays.stream(count).max().getAsInt();
+
+        int maxFreqTaskOccupy = (maxFreq - 1) * (n + 1);
+    
+        int nMaxFreq = (int) Arrays.stream(count).filter(c -> c == maxFreq).count();
+   
+        
+        
+        return Math.max(maxFreqTaskOccupy + nMaxFreq, tasks.length);
+
+*/
+
+        
+    }
+}
