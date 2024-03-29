@@ -1,0 +1,69 @@
+class Solution {
+    public int findMaxLength(int[] nums) 
+    {
+
+        int n = nums.length;
+        int[] recorder = new int[2 * n + 1];
+        
+        for(int i = 0; i < recorder.length; i++) recorder[i] = -2;
+        
+        int sum = n, max = 0;
+        recorder[n] = -1;
+        
+        for ( int i = 0; i <n; i++)
+        {
+            sum += (nums[i] * 2 - 1);
+
+
+            if (recorder[sum] == -2)
+            {
+                recorder[sum] = i; 
+
+
+            }
+            else
+            {
+                max = Math.max(max, i - recorder[sum]);
+
+            }
+
+
+        }
+        
+        return max;
+
+
+
+
+/*
+        int maxLength = 0, count = 0;
+
+        HashMap<Integer,Integer> countMap=new HashMap<>();
+        countMap.put(0, -1);
+
+        for (int i = 0; i < nums.length;i++) 
+        {
+            count += nums[i] == 1 ? 1 : -1;
+
+            if (countMap.containsKey(count)) 
+            {
+                maxLength = Math.max(maxLength,i-countMap.get(count));
+            } 
+            else 
+            {
+
+                countMap.put(count,i);
+
+
+            }
+
+
+        }
+        
+        return maxLength;
+
+
+*/
+        
+    }
+}
