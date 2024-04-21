@@ -1,0 +1,141 @@
+class Solution 
+{
+
+    public boolean validPath(int n, int[][] edges, int source, int destination) 
+    {
+        if(edges.length == 0) 
+        {
+            return true;
+
+        }
+
+        boolean[] visited = new boolean[n];
+        boolean flag = true;
+        visited[source] = true;
+        while(flag)
+        {
+            flag = false;
+
+
+            for(int[] edge : edges)
+            {
+                if(visited[edge[0]] != visited[edge[1]])
+                {
+
+                    visited[edge[0]] = true;
+                    visited[edge[1]] = true;
+                    flag = true;
+                
+                }
+                
+                if(visited[destination]) 
+                {
+                    return true;
+                }
+
+            }
+        
+        }
+        
+        
+        return false;
+    
+    }
+
+
+}
+
+
+
+/*
+
+RUNTIME 13 ms, MEMORY 112.32 MB
+
+
+class Solution 
+{
+
+    int[] parent;
+    int[] rank;
+
+    public boolean validPath(int n, int[][] edges, int source, int destination) 
+    {
+
+        parent = new int[n];
+        rank = new int[n];
+
+
+        for(int i=0; i<n;i++)
+        {
+            parent[i] = i;
+            rank[i] = 1;
+        }
+        for(int[] edge: edges)
+        {
+
+            union(edge[0], edge[1]);
+
+
+
+        }
+
+        return find(source) == find(destination);
+
+
+
+
+
+
+        
+    }
+
+    public int find(int i)
+    {
+        if(parent[i] != i)
+        {
+
+            parent[i] = find(parent[i]);
+
+        }
+        return parent[i];
+
+    }
+
+    public void union(int a, int b)
+    {
+
+        int rootA = find(a), rootB = find(b);
+
+        if(rootA != rootB)
+        {
+            if(rank[rootA] >rank[rootB])
+            {
+                parent[rootB] = rootA;
+
+            }
+            else if(rank[rootA] < rank[rootB])
+            {
+                parent[rootA] = rootB;
+
+            }
+            else
+            {
+                parent[rootB] = rootA;
+                rank[rootA]++;
+
+            }
+        }
+
+
+
+
+
+
+    }
+
+
+
+}
+
+
+*/
