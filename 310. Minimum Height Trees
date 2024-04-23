@@ -1,0 +1,141 @@
+class Solution 
+{
+
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) 
+    {
+
+        if (n == 1) return Arrays.asList(0);
+
+        int[] adjLists = new int[n];
+        int[] indegrees = new int[n];
+        
+        for (int[] edge: edges) 
+        {
+            adjLists[edge[0]] ^= edge[1];
+            adjLists[edge[1]] ^= edge[0];
+            indegrees[edge[0]]++;
+            indegrees[edge[1]]++;
+        }
+
+        Deque<Integer> leaves = new ArrayDeque<>();
+        
+        for (int i = 0; i<n; i++) if (indegrees[i] == 1) leaves.offerLast(i);
+        
+        List<Integer> roots = new ArrayList<>();
+
+        int remLeaves = n;
+        
+        while (remLeaves > 2) 
+        {
+            int levelLeafSize = leaves.size();
+            remLeaves -= levelLeafSize;
+            
+            while(levelLeafSize > 0) 
+            { 
+                levelLeafSize -= 1;
+                int leaf = leaves.pollFirst();
+                int parent = adjLists[leaf];
+                adjLists[parent] ^= leaf;
+                indegrees[parent]--;
+
+                if (indegrees[parent] == 1) 
+                {
+                    leaves.offerLast(parent);
+                
+                }
+            
+            } 
+        
+        }
+
+        roots.addAll(leaves);
+        
+        return roots;
+    
+    }
+}
+
+
+
+
+/*
+
+RUNTIME 57 ms, MEMORY 61.08 MB
+
+class Solution {
+    public List<Integer> findMinHeightTrees(int n, int[][] edges) 
+    {
+
+        if (n == 0 || edges.length == 0)
+        {
+            return new ArrayList<>(Arrays.asList(0));
+        }
+      
+
+        ArrayList<Integer> result = new ArrayList<>();
+        HashMap<Integer, Set<Integer>> graph = new HashMap<>();
+
+        for (int i = 0; i < n; ++i)
+        {
+            graph.put(i, new HashSet<>());
+
+        }
+
+        for (int[] edge : edges) 
+        {
+
+             int u = edge[0];
+             int v = edge[1];
+             graph.get(u).add(v);
+             graph.get(v).add(u);
+
+        }
+
+    for (Map.Entry<Integer, Set<Integer>> entry : graph.entrySet()) 
+    {
+        int label = entry.getKey();
+        Set<Integer> children = entry.getValue();
+
+        if (children.size() == 1)
+        {
+            result.add(label);
+
+        }
+
+    }
+
+    while (n > 2) 
+    {
+      n -= result.size();
+      ArrayList<Integer> nextLeaves = new ArrayList<>();
+      
+      for (int leaf : result) 
+      {
+
+        int u = (int) graph.get(leaf).iterator().next();
+        graph.get(u).remove(leaf);
+        
+        if (graph.get(u).size() == 1)
+        {
+            nextLeaves.add(u);
+
+        }
+      
+      }
+      
+      result = nextLeaves;
+    
+    
+    }
+
+    return result;
+
+
+
+
+
+        
+    }
+}
+
+*/
