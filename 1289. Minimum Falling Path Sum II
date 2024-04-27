@@ -1,0 +1,128 @@
+class Solution {
+    public int minFallingPathSum(int[][] grid) 
+    {
+
+        int n = grid.length;
+        int[][] dp = new int[n][3]; 
+
+        for(int i = 0; i < n; i++) 
+        {
+            Arrays.fill(dp[i], Integer.MAX_VALUE/2);
+        }
+        
+        for(int i = 0; i < n; i++) 
+        {
+            int new_min = Math.min(dp[0][0], grid[0][i]);
+            
+            if(new_min == grid[0][i]) 
+            {
+                dp[0][2] = i;
+                dp[0][1] = dp[0][0];
+                dp[0][0] = new_min;
+            
+            } 
+            else 
+            {
+                dp[0][1] = Math.min(dp[0][1], grid[0][i]);
+            
+            }
+        
+        
+        }
+
+        for(int i = 1; i < n; i++) 
+        {      
+            for(int j = 0; j < n; j++) 
+            {
+                int new_min = Integer.MAX_VALUE;
+                
+                if(j == dp[i-1][2]) 
+                {
+                    new_min = dp[i-1][1] + grid[i][j];
+                } 
+                else 
+                {
+                    new_min = dp[i-1][0] + grid[i][j];
+                
+                }
+                
+                if(new_min < dp[i][0]) 
+                {
+                    dp[i][1] = dp[i][0];
+                    dp[i][0] = new_min;
+                    dp[i][2] = j;
+                
+                } 
+                else if(new_min < dp[i][1]) 
+                {
+                    dp[i][1] = new_min;
+                
+                
+                }
+            
+            
+            }
+        
+        
+        }
+        
+        return dp[n-1][0];
+
+
+
+
+
+        /*
+
+
+        Runtime 37 ms, Memory 52.14 MB
+
+        int n = grid.length, result = Integer.MAX_VALUE;
+        int[][] dp = new int[n][n];
+
+        for(int[] row : dp)
+        {
+            Arrays.fill(row, -1);
+
+
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            dp[0][i] = grid[0][i];
+
+        }
+
+        for(int i=1; i<n; i++)
+        {
+            for(int j=0; j<n; j++)
+            {
+
+                int temp = Integer.MAX_VALUE;
+
+                for(int k = 0;k<n;k++)
+                {
+                    if(j != k)
+                    {
+                        temp = Math.min(temp, grid[i][j] + dp[i-1][k]);
+
+                    }
+
+                    dp[i][j] = temp;
+
+                }
+            }
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            result = Math.min(result, dp[n-1][i]);
+
+        }
+
+        return result;
+*/
+
+        
+    }
+}
