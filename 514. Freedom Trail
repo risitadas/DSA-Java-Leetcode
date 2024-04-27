@@ -1,0 +1,71 @@
+class Solution {
+    public int findRotateSteps(String ring, String key) 
+    {
+
+        char[] ringString = ring.toCharArray();
+        ArrayList<Integer>[] list = new ArrayList[26];
+
+        for(int i=0; i<ringString.length; i++)
+        {
+
+            int c = ringString[i] - 'a';
+            ArrayList<Integer> l = list[c];
+
+            if(l == null)
+            {
+                list[c] = l = new ArrayList<>();
+
+            }
+
+            l.add(i);
+        }
+
+        return helperFunc(0,0,list, key.toCharArray(), ring, new int[key.length()][ringString.length] );
+
+
+
+
+        
+    }
+
+    public int helperFunc(int indx, int curr, ArrayList<Integer>[] list, char[] k, String ring, int[][] memo)
+    {
+
+
+        if(indx == k.length)
+        {
+            return 0;
+
+        }
+
+        if(memo[indx][curr] > 0)
+        {
+            return memo[indx][curr] -1;
+
+        }
+
+        int min = Integer.MAX_VALUE;
+
+        for(int i: list[k[indx] - 'a'])
+        {
+            int temp;
+
+            if(i >= curr)
+            {
+                temp = Math.min(i-curr, curr + ring.length()  -i );
+
+            }
+            else
+            {
+                temp = Math.min(curr-i, i+ring.length() - curr);
+
+            }
+            min = Math.min(min, temp + helperFunc(indx + 1, i, list, k, ring, memo) );
+
+        }
+
+        return (memo[indx][curr] = min+2) - 1;
+
+
+    }
+}
