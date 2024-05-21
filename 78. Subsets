@@ -1,0 +1,47 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) 
+    {
+        
+
+        ArrayList<List<Integer>> subsums = new ArrayList<>();
+        
+
+        subsets(0, nums, new ArrayList<>(), subsums);
+        
+        return subsums;
+
+
+
+
+
+
+
+
+
+    }
+
+    public static void subsets(int index, int[] arr, ArrayList<Integer> list,ArrayList<List<Integer>> result)
+    {
+
+        if(result.contains(list))
+        {
+            return;
+        }
+
+        if(index == arr.length)
+        {
+            result.add(new ArrayList<>(list));
+            return;
+
+        }
+
+        list.add(arr[index]);
+        subsets(index+1, arr, list, result);
+
+        list.remove(list.size()-1);
+        subsets(index+1, arr, list, result);
+
+
+
+    }
+}
