@@ -1,0 +1,64 @@
+class Solution {
+
+    static final int mod = 1000000007;
+    public int checkRecord(int n) 
+    {
+
+        int[][] last_dp = new int[2][3];
+        int[][] curr_dp = new int[2][3];
+
+        last_dp[0][0] = 1;
+
+        for(int i=0;i<n; i++)
+        {
+
+            for(int countA = 0; countA<2; countA++)
+            {
+                for(int countL = 0; countL<3; countL++)
+                {
+
+                    curr_dp[countA][0] = (curr_dp[countA][0] + last_dp[countA][countL]) % mod;  //choosing "P"
+
+                    if(countA ==0)
+                    {
+                        curr_dp[countA + 1][0] = (curr_dp[countA + 1][0] + last_dp[countA][countL] ) %mod;   // choosing "A"
+
+                    }
+
+                    if(countL < 2)
+                    {
+                        curr_dp[countA][countL+1] = (curr_dp[countA][countL+1] + last_dp[countA][countL] ) %mod;     //choosing "L"
+
+                    }
+
+                    
+
+
+                }
+            }
+
+            last_dp = curr_dp;
+            curr_dp = new int [2][3];
+
+        }
+
+        int result = 0;
+        for(int countA=0; countA<2; countA++)
+        {
+            for(int countL = 0; countL<3; countL++)
+            {
+                result = (result + last_dp[countA][countL]) % mod;
+            }
+
+        }
+
+        return result;
+        
+        
+
+
+
+
+        
+    }
+}
