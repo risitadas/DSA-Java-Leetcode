@@ -1,0 +1,108 @@
+class Solution
+{
+    public int beautifulSubsets(int[] nums, int k)
+    {
+
+        Arrays.sort(nums);
+        return rec(nums, 0, k, new HashSet());
+        
+
+
+
+    }
+
+    public int rec(int[] nums, int index, int k, HashSet<Integer> hs)
+    {
+
+        if(index >= nums.length)
+        {
+            return 0;
+
+        }
+
+        if(hs.contains(nums[index]))
+        {
+            return rec(nums, index+1, k, hs);
+
+        }
+
+        int result=1;
+
+        result += rec(nums, index+1, k, hs);
+
+        hs.add(nums[index] + k);
+
+        result += rec(nums, index+1, k, hs);
+
+        hs.remove(nums[index] + k);
+
+        return result;
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+/*
+
+RUNTIME 785 ms, MEMORY 45.28 MB
+
+class Solution {
+    public int beautifulSubsets(int[] nums, int k) 
+    {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int result = dfs(nums, 0, k, map);
+        return result-1;
+
+
+        
+    }
+
+    public int dfs(int[] nums, int index, int k, HashMap<Integer, Integer> map)
+    {
+
+        if(index == nums.length)
+        {
+            return 1;
+
+        }
+
+        int visited=0;
+        if(!map.containsKey(nums[index] - k) && !map.containsKey(nums[index] + k))
+        {
+
+            map.put(nums[index], map.getOrDefault(nums[index], 0) + 1);
+            visited = dfs(nums, index+1, k, map);
+
+            map.put(nums[index] , map.get(nums[index]) - 1);
+
+            if(map.get(nums[index]) == 0)
+            {
+                map.remove(nums[index]);
+
+            }
+
+
+
+        }
+
+        int token = dfs(nums, index+1,k, map);
+
+        return token+visited;
+
+    }
+
+
+
+}
+
+
+*/
