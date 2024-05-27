@@ -1,0 +1,53 @@
+class Solution {
+    public List<String> wordBreak(String s, List<String> wordDict) 
+    {
+       
+       ArrayList<String> result = new ArrayList<>();
+       func(s, wordDict, result, "");
+       return result;
+
+
+        
+    }
+
+    public void func(String s, List<String> wordDict, ArrayList<String> result, String curr)
+    {
+
+        if(s.isEmpty())
+        {
+            return;
+
+        }
+
+        for(String word: wordDict)
+        {
+
+            if(s.startsWith(word))
+            {
+                String newCurr = curr.isEmpty() ? word:curr + " " + word;
+
+                if(s.length() == word.length())
+                {
+                    result.add(newCurr);
+
+                }
+                else
+                {
+                    func(s.substring(word.length()), wordDict, result, newCurr);
+                
+                }
+
+            }
+
+            
+
+
+        }
+
+
+
+    }
+
+
+
+}
