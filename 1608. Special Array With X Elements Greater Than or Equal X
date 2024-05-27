@@ -1,0 +1,29 @@
+class Solution {
+    public int specialArray(int[] nums) 
+    {
+
+        int n=nums.length;
+        Arrays.sort(nums);
+
+        if(nums[0] >= n)
+        {
+            return n;
+        }
+
+        for(int i = 1; i < n; ++i) 
+        {
+            int count = n - i;
+
+            if(nums[i - 1] < count && nums[i] >= count)
+            {
+                return count;
+
+            }
+
+        }
+
+        return -1;
+
+        
+    }
+}
