@@ -1,0 +1,97 @@
+class Solution {
+    public int equalSubstring(String s, String t, int maxCost) 
+    {
+
+        int[] arr = new int[s.length()];
+        char[] ch = s.toCharArray(), target = t.toCharArray();
+
+        for(int i=0; i<arr.length; i++)
+        {
+            arr[i] = Math.abs(ch[i] - target[i]);
+
+        }
+
+        int cost=0, start=0, end=0, result=0;
+
+        while(start < arr.length && end <arr.length)
+        {
+
+            cost = cost+arr[end++];
+
+            if(cost <= maxCost)
+            {
+                result = Math.max(result, end - start);
+
+            }
+            else
+            {
+                while(cost > maxCost)
+                {
+                    cost = cost-arr[start++];
+
+                }
+            }
+
+        }
+
+        return result;
+
+
+
+        /*
+
+        RUNTIME 6 MS , MEMORY 43.40 MB
+
+
+        int[] diff = new int[s.length()];
+        for(int i=0; i<s.length(); i++)
+        {
+            diff[i] = Math.abs(s.charAt(i) - t.charAt(i));
+
+        }
+
+        int start = 0, count = 0;
+
+        for(int i=0; i<s.length(); i++)
+        {
+            maxCost = maxCost - diff[i];
+
+            while(maxCost <0)
+            {
+                maxCost = maxCost + diff[start++];
+
+            }
+
+            count = Math.max(count, i-start+1);
+
+        }
+
+        return count;
+
+        */
+
+
+        /*
+
+        RUNTIME 9 MS , MEMORY 42.95 MB
+
+        int j = 0;
+        for(int i = 0; i < s.length(); i++) 
+        {
+            maxCost -= Math.abs(s.charAt(i) - t.charAt(i));
+            
+            if(maxCost < 0)
+            {
+                maxCost += Math.abs(s.charAt(j) - t.charAt(j++));
+
+            }
+
+        }
+
+        return s.length() - j;
+
+*/
+
+        
+    }
+}
