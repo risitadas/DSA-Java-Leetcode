@@ -2,6 +2,27 @@ class Solution {
     public long countCompleteDayPairs(int[] hours) 
     {
 
+        int[] count=new int[24];
+        long result=0;
+
+        for(int hour:hours)
+        {
+            int remainder = hour%24;
+            int complement = (24-remainder)%24;
+
+            result += count[complement];
+            count[remainder]++;
+
+        }
+
+        return result;
+
+
+
+        /*
+
+        RUNTIME 5 MS, MEMORY 97.1 MB
+
         //int result=0;
         long result=0;
         int[] count = new int[24];
@@ -14,6 +35,8 @@ class Solution {
         }
 
         return result;
+
+        */
         
     }
 }
