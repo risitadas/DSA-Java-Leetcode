@@ -1,0 +1,151 @@
+class Solution 
+{
+    public int minDays(int[] arr, int m, int k) 
+    {
+
+        long val = (long) m * k;
+        int n = arr.length;
+
+        if (val > n) 
+        {
+            return -1; 
+        }
+
+        int maxNum = findMax(arr);
+
+        int low = 1;
+        int high = maxNum;
+
+        while (low <= high) 
+        {
+            int mid = (low + high) / 2;
+            int count = findTotalBouquets(arr, mid, k);
+
+            if(count >= m) 
+            {
+                high = mid - 1;
+            } 
+            else 
+            {
+                low = mid + 1;
+            }
+        }
+
+        return low;
+    }
+
+    public static int findTotalBouquets(int[] arr, int day, int k) 
+    {
+
+       int count = 0;
+       int tmp = 0;
+
+        for (int i = 0; i < arr.length; i++) 
+        {
+
+            if (arr[i] <= day) 
+            {
+                tmp++;
+                if (tmp == k) 
+                {
+                    count++;
+                    tmp = 0;
+                }
+            } 
+            else
+            {
+                tmp = 0;
+            }
+
+        }
+
+        return count;
+
+
+    }
+
+    public static int findMax(int[] arr) 
+    {
+        int n = arr.length;
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < n; i++) 
+        {
+            max = Math.max(max, arr[i]);
+        }
+
+        return max;
+
+    }
+    
+}
+
+
+
+
+
+/*
+
+RUNTIME 25 MS, MEMORY 59.10 MB
+
+class Solution {
+    public int minDays(int[] bloomDay, int m, int k) 
+    {
+
+        if(bloomDay.length < (long) m * k)
+        {
+            return -1;
+        }
+
+        int l = Arrays.stream(bloomDay).min().getAsInt();
+        int r = Arrays.stream(bloomDay).max().getAsInt();
+
+        while(l < r) 
+        {
+            int mid = (l + r) / 2;
+            if (getBouquetCount(bloomDay, k, mid) >= m)
+            {
+                r = mid;
+            }
+            else
+            {
+                l = mid + 1;
+            }
+
+        }
+
+        return l;
+
+        
+    }
+
+
+    public int getBouquetCount(int[] bloomDay, int k, int waitingDays) 
+    {
+        int bouquetCount = 0;
+        int requiredFlowers = k;
+
+        for(int day : bloomDay)
+        {
+            if (day > waitingDays)
+            {
+                requiredFlowers = k;
+            }
+            else if(--requiredFlowers == 0) 
+            {
+                ++bouquetCount;
+                requiredFlowers = k;
+            }
+
+        }
+
+        return bouquetCount;
+
+
+    }
+
+
+}
+
+
+*/
