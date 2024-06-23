@@ -1,0 +1,52 @@
+class Solution {
+    public int numberOfPermutations(int n, int[][] requirements) 
+    {
+
+        int MOD = 1000000007;
+        int max = 400; //maxInversions
+        int[][] dp = new int[n+1][max+1];
+        int[] count = new int[n+1];
+
+        Arrays.fill(count, -1);
+
+        for(int[] req: requirements)
+        {
+            int end = req[0];
+            int cnt = req[1];
+
+            count[end+1] = cnt;
+
+        }
+
+        dp[1][0] = 1;
+
+        for(int i=2; i<=n; i++)
+        {
+            // new inversions
+            for(int k = 0; k <i; k ++)
+            {
+                for(int j=0; j+k <=max; j++)
+                {
+                    // inversions after insertion
+                    int inversions = j + k;
+
+                    if(count[i] != -1 && inversions != count[i])
+                    {
+                        continue;
+
+                    }
+
+                    dp[i][inversions] += dp[i-1][j];
+                    dp[i][inversions] %= MOD;
+
+
+                }
+
+
+            }
+        }
+
+        return dp[n][count[n]];
+        
+    }
+}
