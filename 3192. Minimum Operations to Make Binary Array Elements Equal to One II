@@ -1,0 +1,22 @@
+class Solution {
+    public int minOperations(int[] nums) 
+    {
+
+        int result = 0, target = 1;
+
+        for(int num : nums)
+        {
+            if (num != target) 
+            {
+                target ^= 1;
+                result++;
+                
+            }
+        }
+
+        return result;
+
+
+
+    }
+}
