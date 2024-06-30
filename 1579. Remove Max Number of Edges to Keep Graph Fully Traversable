@@ -1,0 +1,122 @@
+class Solution 
+{
+    class UnionFind{
+
+        int[] id; // parent
+        int [] rank;
+        int count;
+
+        public UnionFind(int n)
+        {
+            id = new int[n]; 
+            rank = new int[n];
+            count=n;
+
+            for(int i=0; i<n; i++)
+            {
+                id[i] = i;
+            //    rank[i] = 0;
+            }
+        }
+
+        public boolean unionByRank(int u, int v)
+        {
+
+            int i = find(u);
+            int j = find(v);
+
+            if(i == j)
+            {
+                return false;
+            }
+
+            if(rank[i] < rank[j])
+            {
+                id[i] = j;
+            }
+            else if (rank[i] > rank[j])
+            {
+                id[j] = i;
+            }
+            else 
+            {
+                id[i] = j;
+                rank[j]++;
+            }
+            count--;
+            return true;
+
+
+        }
+
+        public int getCount()
+        {
+            return count;
+
+        }
+
+        public int find(int x)
+        {
+            if(id[x] != x)
+            {
+                id[x] = find(id[x]);
+            }
+            return id[x];
+
+        }
+
+
+
+    }
+
+
+    public int maxNumEdgesToRemove(int n, int[][] edges) 
+    {
+        UnionFind alice = new UnionFind(n);
+        UnionFind bob = new UnionFind(n);
+
+        int reqEdges = 0; // required edges
+        Arrays.sort(edges, (a, b) -> b[0] - a[0]);
+
+        for(int[] edge : edges)
+        {
+            int type = edge[0];
+            int u = edge[1] - 1;
+            int v = edge[2] - 1;
+
+            switch(type){
+
+                case 3: // traversed both by alice and bob
+                    if(alice.unionByRank(u, v) | bob.unionByRank(u,v))
+                    {
+                        reqEdges++;
+                    }
+                    break;
+                
+                case 2: // traversed by bob 
+                    if(bob.unionByRank(u, v))
+                    {
+                        reqEdges++;
+                    }
+                
+                case 1: // traversed by alice 
+                    if(alice.unionByRank(u, v))
+                    {
+                        reqEdges++;
+                    }
+
+            }
+
+        }
+        
+        if(alice.getCount() > 1 || bob.getCount() > 1)
+        {
+            return -1;
+        }
+
+        return edges.length - reqEdges;
+
+
+
+    }
+}
