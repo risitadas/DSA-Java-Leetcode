@@ -1,0 +1,42 @@
+class Solution {
+    public long maximumPoints(int[] enemyEnergies, int currentEnergy) 
+    {
+
+        Arrays.sort(enemyEnergies);
+        int n = enemyEnergies.length;
+        
+        long result=0;
+        long curr=0;
+        int left=0, right = n-1;
+
+        while(right - left >=0)
+        {
+            if(currentEnergy >= enemyEnergies[left])
+            {
+                int times = currentEnergy / enemyEnergies[left];
+                curr += times;
+                currentEnergy -= times * enemyEnergies[left];
+          //      left++;
+
+            }
+            else if(curr > 0)
+            {
+                currentEnergy += enemyEnergies[right];
+                right--;
+         //       curr--;
+
+            }
+            else
+            {
+                break;
+            }
+
+            result = Math.max(result, curr);
+        }
+
+        return result;
+
+
+        
+    }
+}
