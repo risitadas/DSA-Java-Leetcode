@@ -1,0 +1,26 @@
+class Solution {
+    public int maxHeightOfTriangle(int red, int blue) 
+    {
+
+        return Math.max(maxHeight(red, blue), maxHeight(blue, red));
+
+        
+    }
+
+    public int maxHeight(int n1, int n2) 
+    {
+        
+        int oddHeight = (int) Math.sqrt(4 * n1) - 1;
+        int evenHeight = (int) Math.sqrt(4 * n2 + 1) - 1;
+    
+        return Math.min(oddHeight, evenHeight) + (Math.abs(oddHeight - evenHeight) >= 1 ? 1 : 0);
+
+        
+    }
+
+
+
+
+
+
+}
