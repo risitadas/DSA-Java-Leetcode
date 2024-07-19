@@ -1,0 +1,58 @@
+class Solution {
+    public List<Integer> luckyNumbers (int[][] matrix) 
+    {
+
+        for (int[] row : matrix) 
+        {
+            int minIndex = getMinIndex(row); //finding the col of the minimum element of thid row
+
+            if(row[minIndex] == maxNumOfColumn(matrix, minIndex)) // checking if this min is also max in its col
+            {   
+                return List.of(row[minIndex]);
+
+            }
+
+        }
+        
+        return new ArrayList<>();
+
+        
+    }
+
+
+    public int getMinIndex(int[] row)  // findimg our min col
+    {
+        int minIndex = 0;
+        for(int j = 0; j < row.length; j++)
+        {
+            if (row[j] < row[minIndex]) minIndex = j;
+
+        }
+                
+        
+        return minIndex;
+    
+    }
+
+    public int maxNumOfColumn(int[][] matrix, int j) // finding if max in column
+    {
+        int result = 0;
+        for(int i = 0; i < matrix.length; i++)
+        {
+
+            result = Math.max(result, matrix[i][j]);
+
+        }
+        
+        
+        return result;
+  }
+
+
+
+
+
+
+
+
+}
