@@ -1,0 +1,31 @@
+class Solution {
+    public boolean divideArray(int[] nums) 
+    {
+        int n = nums.length /2;
+        HashSet<Integer> hs = new HashSet<>();
+        for (int num : nums) 
+        {
+            if (!hs.add(num)) 
+            {
+                hs.remove(num);
+
+            }
+
+           
+        }
+
+        return hs.isEmpty();
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+}
