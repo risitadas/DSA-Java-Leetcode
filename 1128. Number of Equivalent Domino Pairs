@@ -1,0 +1,92 @@
+class Solution {
+    public int numEquivDominoPairs(int[][] dominoes) 
+    {
+
+        int result = 0;
+        int[][] pairs = new int[9][9];
+        
+        for(int[] dom: dominoes) 
+        {
+            pairs[dom[0] - 1][dom[1] - 1]++;
+        }
+
+        for(int i = 0; i < 9; i++) 
+        {
+            for(int j = i; j < 9; j++) 
+            {
+                int count = pairs[i][j];
+                if(i != j) 
+                {
+                    count += pairs[j][i];
+                }
+
+                result += (count * (count - 1)) / 2;
+            }
+        }
+
+        return result;
+
+
+
+
+        /*
+
+
+        int result = 0;
+        HashMap<Integer, Integer> count = new HashMap<>();
+
+        for(int[] dom : dominoes) 
+        {
+            int key = Math.min(dom[0], dom[1]) * 10 + Math.max(dom[0], dom[1]);
+            result += count.getOrDefault(key, 0);
+            count.merge(key, 1, Integer::sum);
+        }
+
+        return result;
+
+
+        */
+
+
+        /*
+
+
+        int n = dominoes.length;
+        int i=0, count=0;
+
+        HashMap<String, Integer> map = new HashMap<>();
+
+        while(i < n)
+        {
+            String temp = "";
+            
+            if(dominoes[i][0] > dominoes[i][1])
+            {
+                temp += dominoes[i][1];
+                temp += dominoes[i][0];
+
+            }
+            else
+            {
+                temp += dominoes[i][0];
+                temp += dominoes[i][1];
+
+            }
+
+            if(map.containsKey(temp))
+            {
+                count += map.get(temp);
+
+            }
+
+            map.put(temp, map.getOrDefault(temp, 0) + 1);
+            i++;
+
+        }
+        return count;
+
+
+        */
+        
+    }
+}
