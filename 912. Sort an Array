@@ -1,0 +1,72 @@
+class Solution {
+
+    // can be done through heapsort, mergesort, quicksort
+
+
+
+    public int[] sortArray(int[] nums) 
+    {
+        int n= nums.length;
+        mergeSort(nums, 0, n-1);
+        return nums;
+        
+    }
+
+    public void mergeSort(int[] nums, int left, int right)
+    {
+        if(left >= right)
+        {
+            return;
+
+        }
+        int mid = (left +right)/2;
+
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid+1, right);
+        merge(nums, left, mid, right);
+
+
+
+
+    }
+
+    public void merge(int[] nums, int left, int mid, int right)
+    {
+        // respective index
+        int i= left;
+        int j= mid+1;
+        
+        int[] sorted = new int[right-left+1];
+        int k=0; // sorted index
+
+        while(i <= mid && j <= right)
+        {
+            if(nums[i] < nums[j])
+            {
+                sorted[k++] = nums[i++];
+            }
+            else
+            {
+                sorted[k++] = nums[j++];
+            }
+        }
+
+        while(i <= mid)
+        {
+            sorted[k++] = nums[i++];
+        }
+
+        while(j <= right)
+        {
+            sorted[k++] = nums[j++];
+        }
+
+        for(int x=0; x < sorted.length; x++)
+        {
+            nums[left + x] = sorted[x];
+        }
+
+
+
+    }
+}
