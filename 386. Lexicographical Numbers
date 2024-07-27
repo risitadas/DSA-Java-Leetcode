@@ -1,0 +1,35 @@
+class Solution {
+    public List<Integer> lexicalOrder(int n) 
+    {
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        dfs(n,1,list);
+        return list;
+        
+        
+        
+        
+    }
+    
+    public void dfs(int n, int curr, ArrayList<Integer> list)
+    {
+        
+        if(curr > n)
+        {
+            
+            return;
+        }
+        
+        list.add(curr);
+        dfs(n, curr*10,list);
+        
+        if(curr %10 != 9)
+        {
+            dfs(n, curr+1, list);
+        }
+        
+        
+        
+        
+    }
+}
