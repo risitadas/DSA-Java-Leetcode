@@ -1,0 +1,73 @@
+class Solution {
+    public int minSwaps(int[] nums) 
+    {
+
+        int n = nums.length;
+        int k = 0;
+        for(int i = 0; i < n; i++)
+        {
+            k += nums[i];
+        }
+
+        int sum = 0 , min = n;
+
+        for(int j=0; j < n; j++)
+        {
+            sum += nums[j];
+
+            if(j >= k)
+            {
+                sum -= nums[j-k];
+            
+            }
+            
+            if(j >= k - 1)
+            {
+                min = Math.min(min, k - sum);
+            }
+
+        }
+
+        for(int i=0; i <= k - 2; i++)
+        {
+            
+            sum = sum + nums[i] - nums[n - k + i];
+            min = Math.min(min, k - sum);
+
+
+        }
+
+
+        return min;
+
+
+
+
+/* runtime 21 ms, memory 58.85 mb
+
+        int n = nums.length;
+        int k = (int) Arrays.stream(nums).filter(a -> a == 1).count();
+        int ones = 0, maxOnes = 0;
+
+        for(int i = 0; i < n * 2; i++) 
+        {
+            if(i >= k && nums[(i - k) % n] == 1)
+            {
+                ones--;
+            }
+            
+            if(nums[i % n] == 1)
+            {
+                ones++;
+            }
+            
+            maxOnes = Math.max(maxOnes, ones);
+        }
+
+        return k - maxOnes;
+
+*/
+
+        
+    }
+}
