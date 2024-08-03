@@ -1,0 +1,26 @@
+class Solution 
+{
+    public boolean canBeEqual(int[] target, int[] arr) 
+    {
+        if(target.length != arr.length) return false;
+
+        int[] count1 = new int[1001];
+        int[] count2 = new int[1001];
+
+        for(int i : target)
+        {
+            count1[i]++;
+
+        }
+
+        for(int j : arr)
+        {
+            count2[j]++;
+
+        }
+
+        return Arrays.equals(count1, count2);
+
+        
+    }
+}
