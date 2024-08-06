@@ -1,0 +1,34 @@
+class Solution 
+{
+    static int MOD = 1000000007;
+
+    public int rangeSum(int[] nums, int n, int left, int right) 
+    {
+
+        ArrayList<Integer> subArrSum = new ArrayList<>();
+        long rangeSum = 0;
+
+        for(int i=0; i<n; i++)
+        {
+            int sum=0;
+
+            for(int j=i; j<n; j++)
+            {
+                sum += nums[j];
+                subArrSum.add(sum);
+
+            }
+        }
+
+        Collections.sort(subArrSum);
+
+        for(int i=left-1; i< right; i++)
+        {
+            rangeSum = (rangeSum + subArrSum.get(i)) % MOD;
+
+        }
+
+        return (int)rangeSum;
+        
+    }
+}
