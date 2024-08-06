@@ -1,0 +1,25 @@
+class Solution {
+    public String kthDistinct(String[] arr, int k) 
+    {
+
+        HashMap<String, Integer> count = new HashMap<>();
+
+        for(String a : arr)
+        {
+             count.merge(a, 1, Integer::sum);
+        }
+
+        for(String i : arr)
+        {
+            if(count.get(i) == 1 && --k == 0)
+            {
+                return i;
+            }
+            
+        }
+
+        return "";
+
+        
+    }
+}
