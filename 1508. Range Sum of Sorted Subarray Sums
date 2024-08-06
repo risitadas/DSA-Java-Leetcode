@@ -1,5 +1,40 @@
 class Solution 
 {
+    int MOD = (int)1e9+7;
+
+    public int rangeSum(int[] nums, int n, int left, int right) 
+    {
+        int[] arr= new int[n*(n+1)/2];
+
+        for(int i=0,k=0;i<n;i++)
+        {
+            int sum=0;
+            for(int j=i;j<n;j++)
+            {
+               sum+=nums[j];
+               arr[k++]=sum;
+            }
+        }
+
+        Arrays.sort(arr);
+        int sum=0;
+        for(int i=left;i<=right;i++)
+        {
+            
+            sum=(sum+arr[i-1]) % MOD;
+        }
+        
+        return sum;
+    }
+
+
+
+
+/*
+
+Runtime 170 ms, Memory 72.43 MB
+
+
     static int MOD = 1000000007;
 
     public int rangeSum(int[] nums, int n, int left, int right) 
@@ -31,4 +66,7 @@ class Solution
         return (int)rangeSum;
         
     }
+
+
+    */
 }
