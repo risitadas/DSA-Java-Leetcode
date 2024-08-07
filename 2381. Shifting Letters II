@@ -1,0 +1,88 @@
+class Solution {
+    public String shiftingLetters(String s, int[][] shifts) 
+    {
+        char arr[]=s.toCharArray();
+
+        int[] map=new int[arr.length+1];
+
+        for(int[] i:shifts)
+        {
+            if(i[2]==0)
+            {
+                map[i[0]]-=1;
+                map[i[1]+1]+=1;
+            }
+            else
+            {
+                map[i[0]]+=1;
+                map[i[1]+1] -=1;
+            }
+        }
+
+        int sum=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            sum+=map[i];
+            int n=((arr[i]-'a')+sum)%26;
+
+            if(n<0) n+=26;
+            
+            arr[i]=(char)(n+'a');
+        
+        }
+        
+        return new String(arr);
+
+
+
+
+
+
+/*
+RUNTIME 2115 MS, MENORY 74.52 MB
+
+       int[] result = new int[s.length()];
+
+       for( int[] ch : shifts)
+       {
+           int i = ch[0];
+           int j = ch[1];
+           int k = ch[2];
+           
+           if(k==1)
+           {
+               for(int l=i; l<=j; l++)
+               {
+                   result[l]++;
+               }
+           }
+           else
+           {
+               for(int l=i; l<=j; l++)
+               {
+                   result[l]--;
+               }
+           }
+
+       }
+
+       char[] check=s.toCharArray();
+
+       for(int i=0; i<s.length(); i++)
+       {
+           int newchar=((s.charAt(i)-'a')+result[i])%26;
+
+           if(newchar<0) newchar+=26;
+
+           check[i]=(char)(newchar+'a');
+
+       }
+       
+       return String.valueOf(check);
+
+
+*/
+
+    }
+}
