@@ -1,0 +1,25 @@
+class Solution {
+    public int secondsToRemoveOccurrences(String s) 
+    {
+
+        int zeros = 0, result = 0;
+
+        for(char c : s.toCharArray())
+        {
+            if(c == '0')
+            {
+                zeros++;
+            }
+            else if(zeros > 0) // c == '1'
+            {
+                result = Math.max(result + 1, zeros);
+
+            }
+
+        }
+        
+        return result;
+
+        
+    }
+}
