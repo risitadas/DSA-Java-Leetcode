@@ -1,0 +1,148 @@
+class Solution 
+{
+    public int[][] result;
+    int index, minX, minY, maxX, maxY;
+
+    public void left (int start, int end)
+    {
+        for(int i=start; i>= end; i--)
+        {
+            result[index++] = new int[]{maxY, i};
+        }
+
+
+    }
+
+    public void right (int start, int end)
+    {
+        for(int i=start; i<= end; i++)
+        {
+            result[index++] = new int[]{minY, i};
+        }
+
+
+    }
+
+    public void up (int start, int end)
+    {
+        for(int i=start; i>= end; i--)
+        {
+            result[index++] = new int[]{i, minX};
+        }
+
+
+    }
+
+    public void down (int start, int end)
+    {
+        for(int i=start; i<= end; i++)
+        {
+            result[index++] = new int[]{i, maxX};
+        }
+
+
+    }
+
+
+
+
+    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) 
+    {
+
+        int n = cols * rows;
+        result = new int[n][];
+
+        minX = cStart;
+        maxX = cStart + 1;
+        minY = rStart;
+        maxY = rStart;
+        index = 0;
+        result[index++] = new int[]{rStart, cStart};
+
+        while(true) 
+        {
+            if(minY >= 0)
+            {
+                right(Math.max(0, minX + 1), Math.min(cols - 1, maxX));
+            } 
+            maxY++;
+
+            if (index >= n) break;
+
+            if (maxX < cols) 
+            {
+                down(Math.max(0, minY + 1), Math.min(rows - 1, maxY));
+            }
+            minX--;
+
+            if (index >= n) break;
+
+            if (maxY < rows) 
+            {
+                left(Math.min(cols - 1, maxX - 1), Math.max(0, minX));
+            }
+            minY--;
+
+            if (index >= n) break;
+
+            if (minX >= 0)
+            {
+                 up(Math.min(rows - 1, maxY - 1), Math.max(0, minY));
+            }
+            maxX++;
+
+            if (index >= n) break;
+
+
+        }
+
+        
+        return result;
+
+
+
+    
+
+    }    
+        
+
+
+/*
+
+RUNTIME 7 MS, MEMORY 45.34 MB
+
+
+
+    public int[][] spiralMatrixIII(int rows, int cols, int rStart, int cStart) 
+    {
+
+        int[] dx = {1, 0, -1, 0};
+        int[] dy = {0, 1, 0, -1};
+        ArrayList<int[]> result = new ArrayList<>(Arrays.asList(new int[] {rStart, cStart}));
+
+        for(int i = 0; result.size() < rows * cols;i++)
+        {
+            for(int j = 0; j <i/2 + 1; j++)  // step
+            {
+                rStart += dy[i % 4];
+                cStart += dx[i % 4];
+
+                if(0 <= rStart && rStart < rows && 0 <= cStart && cStart < cols)
+                {
+                    result.add(new int[] {rStart, cStart});
+                }
+
+
+            }
+
+        }
+
+        return result.stream().toArray(int[][] ::new);
+
+    }
+*/
+
+
+        
+   
+}
