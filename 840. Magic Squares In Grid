@@ -1,0 +1,142 @@
+class Solution 
+{
+    public int numMagicSquaresInside(int[][] grid) 
+    {
+        int result = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+
+        for(int row = 0; row + 2 < m; row++) 
+        {
+            for(int col = 0; col + 2 < n; col++) 
+            {
+                if(isMagicSquare(grid, row, col)) 
+                {
+                    result++;
+                }
+            }
+        }
+
+        return result;
+
+    }
+
+    public boolean isMagicSquare(int[][] grid, int row, int col) 
+    {
+
+        boolean[] visited = new boolean[10];
+
+        for(int i = 0; i < 3; i++) 
+        {
+            for(int j = 0; j < 3; j++) 
+            {
+                int n = grid[row + i][col + j];
+
+                if (n < 1 || n > 9) return false;
+                if (visited[n]) return false;
+
+                visited[n] = true;
+
+            }
+
+        }
+
+        // checking if the diagonal sums are of same value
+        int diagonal1 = grid[row][col] + grid[row + 1][col + 1] + grid[row + 2][col + 2];
+        
+        int diagonal2 = grid[row + 2][col] + grid[row + 1][col + 1] + grid[row][col + 2];
+
+        if(diagonal1 != diagonal2) return false;
+
+
+        // checking if all the row sums share the same value as the diagonal sum
+        int row1 = grid[row][col] + grid[row][col + 1] + grid[row][col + 2];
+        
+        int row2 = grid[row + 1][col] + grid[row + 1][col + 1] + grid[row + 1][col + 2];
+        
+        int row3 = grid[row + 2][col] + grid[row + 2][col + 1] + grid[row + 2][col + 2];
+
+        if(!(row1 == diagonal1 && row2 == diagonal1 && row3 == diagonal1)) 
+        {
+            return false;
+        }
+
+
+        //checking the same for all column sums with the diagonal sums
+        int col1 = grid[row][col] + grid[row + 1][col] + grid[row + 2][col];
+
+        int col2 = grid[row][col + 1] + grid[row + 1][col + 1] + grid[row + 2][col + 1];
+
+        int col3 = grid[row][col + 2] + grid[row + 1][col + 2] + grid[row + 2][col + 2];
+
+        if(!(col1 == diagonal1 && col2 == diagonal1 && col3 == diagonal2)) 
+        {
+            return false;
+        }
+
+        
+
+        return true;
+
+    }
+
+
+
+
+/*
+
+RUNTIME 2 MS, MEMORY 43.78 MB
+
+
+    public boolean isMagicSquares(int[][] grid, int i, int j)
+    {
+
+        String str = new String("");
+
+        for(int n : new int[] {0,1,2,5,8,7,6,3 })
+        {
+
+            str += Integer.toString(grid[i+n/3][j + n%3]);
+
+        }
+
+        return new String("4381672943816729").contains(str) || 
+                new String ("9276183492761834").contains(str);
+
+
+    }
+
+
+    public int numMagicSquaresInside(int[][] grid) 
+    {
+
+        int n = grid.length, result=0;
+
+        for(int i=0; i+2 <n; i++)
+        {
+            
+            for(int j=0; j+2 < grid[0].length; j++)
+            {
+                if(grid[i][j] % 2 == 0 && grid[i+1][j+1] ==5)
+                {
+                    if(isMagicSquares(grid, i, j))
+                    {
+
+                        result++;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        return result;
+        
+    }
+
+*/
+
+
+}
