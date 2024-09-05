@@ -1,0 +1,71 @@
+class Solution {
+    public int[] missingRolls(int[] rolls, int mean, int n) 
+    {
+
+        int[] result = new int[n];
+        int sum=0;
+        
+        for(int r : rolls)
+        {
+            sum += r;
+
+        }
+
+        int missingSum = mean * (n + rolls.length) - sum;
+
+        if(missingSum > 6 * n || missingSum < n)
+        {
+            return new int[]{};
+
+        } 
+
+        int remainder = missingSum % n;
+        int avg = missingSum / n;
+
+
+        for(int i=0; i< remainder ; i++)
+        {
+            result[i] = avg + 1;
+
+        }
+
+        for(int i = remainder ; i<n; i++)
+        {
+            result[i] = avg;
+
+        }
+
+        return result;
+
+
+
+
+        /*
+RUNTIME 9 MS, MEMORY 59.30 MB
+
+        int targetSum = (rolls.length + n) * mean;
+        int missingSum = targetSum - Arrays.stream(rolls).sum();
+
+        if(missingSum > n * 6 || missingSum < n)
+        {
+            return new int[] {};
+
+
+        }
+
+
+        int[] result = new int[n];
+
+        Arrays.fill(result, missingSum / n);
+        missingSum %= n;
+
+        for(int i = 0; i < missingSum; i++)
+        {
+            result[i]++;
+        }
+
+        return result;
+*/
+        
+    }
+}
