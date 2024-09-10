@@ -1,0 +1,96 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution 
+{
+
+    public int gcd(int a, int b)
+    {
+        if(a == 1 || b==1)
+        {
+            return 1;
+
+        }
+
+        while(b!=0)
+        {
+            int remainder = a%b;
+            a=b; b= remainder;
+
+        }
+        return a;
+
+
+    }
+
+    public ListNode insertGreatestCommonDivisors(ListNode head) 
+    {
+
+        if(head.next == null )
+        {
+            return head;
+        }
+
+        ListNode temp = head;
+        ListNode node1 = head.next;
+
+        while(node1!=null)
+        {
+            int num = gcd(temp.val, node1.val);
+            ListNode x = new ListNode(num);
+            
+            temp.next = x;
+            x.next = node1;
+            temp = node1;
+            node1 = node1.next;
+
+
+
+
+
+        }
+
+        return head;
+
+    }
+
+
+
+    /*
+    RUNTIME 2 MS , MEMORY 45.08 MB
+
+    public int gcd(int a, int b) 
+    {
+        return b == 0 ? a : gcd(b, a % b);
+
+    }
+
+
+    public ListNode insertGreatestCommonDivisors(ListNode head) 
+    {
+
+        for(ListNode curr = head; curr.next != null;) 
+        {
+            ListNode node1 = new ListNode(gcd(curr.val, curr.next.val), curr.next); // inserted node
+            curr.next = node1;
+            curr = node1.next;
+        
+        }
+
+        return head;
+
+        
+    }
+
+
+    */
+
+
+}
