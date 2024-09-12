@@ -1,0 +1,59 @@
+class Solution 
+{
+
+    public boolean func(String w, boolean[] str)
+    {
+
+        for(int i=0; i<w.length(); i++)
+        {
+            if(!str[w.charAt(i) - 'a'])
+            {
+                return false;
+                
+            }
+        }
+
+
+
+        return true;
+    }
+
+    public int countConsistentStrings(String allowed, String[] words) 
+    {
+
+        boolean[] str = new boolean[26];
+
+        for(char c : allowed.toCharArray())
+        {
+            str[c - 'a'] = true;
+
+        }
+
+        int result=0;
+
+        for(String w : words)
+        {
+            if(func(w, str))
+            {
+                result++;
+
+            }
+
+        }
+
+        return result;
+
+
+
+
+/* RUNTIME 120 MS, MEMORY 51.08 MB
+
+
+        return (int)Arrays.stream(words)
+                    .filter(word -> word.matches(String.format("[%s]*", allowed))).count();
+
+
+                    */
+        
+    }
+}
