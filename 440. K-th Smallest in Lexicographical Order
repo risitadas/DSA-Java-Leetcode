@@ -1,0 +1,41 @@
+class Solution {
+    public int findKthNumber(int n, int k) 
+    {
+        long result = 1;
+
+        for(int i = 1; i < k;) 
+        {
+            long gap = getGap(result, result + 1, n);
+            if(i + gap <= k) 
+            {
+                i += gap;
+                result++;
+            } 
+            else 
+            {
+                i++;
+                result *= 10;
+            }
+        }
+
+        return (int)result;
+        
+    }
+
+
+    public long getGap(long a, long b, long n) 
+    {
+        long gap = 0;
+
+        while(a <= n) 
+        {
+            
+            gap += Math.min(n + 1, b) - a;
+            a *= 10;
+            b *= 10;
+        
+        }
+        
+        return gap;
+    }
+}
