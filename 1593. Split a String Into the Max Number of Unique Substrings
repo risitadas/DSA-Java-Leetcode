@@ -1,0 +1,36 @@
+class Solution {
+
+    public int maxUniqueSplit(String s) 
+    {
+        dfs(s, 0, new HashSet<>());
+        return result;
+
+    }
+
+    public int result = 0;
+
+    public void dfs(String s, int start, Set<String> seen) 
+    {
+        if(start == s.length()) 
+        {
+            result = Math.max(result, seen.size());
+            return;
+        }
+
+        for(int i = start + 1; i <= s.length(); i++) 
+        {
+            String substr = s.substring(start, i);
+
+            if(seen.contains(substr)) continue;
+                
+            seen.add(substr);
+            dfs(s, i, seen);
+            seen.remove(substr);
+    
+        }
+
+    }
+
+
+
+}
