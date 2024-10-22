@@ -1,0 +1,95 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution 
+{
+    public long kthLargestLevelSum(TreeNode root, int k) 
+    {
+
+        ArrayList<Long> result = new ArrayList<>();
+        dfs(root, 0, result);
+
+        if(result.size() < k)
+        {
+            return -1;
+        }
+
+        Collections.sort(result, Collections.reverseOrder());
+        return result.get(k - 1);
+
+    }
+
+    public void dfs(TreeNode root, int level, ArrayList<Long> result) 
+    {
+        if(root == null)
+        {
+            return;
+        }
+        
+        if(result.size() == level)
+        {
+            result.add(0L);
+        }
+    
+        result.set(level, result.get(level) + root.val);
+        dfs(root.left, level + 1, result);
+        dfs(root.right, level + 1, result);
+
+    }
+
+
+
+/*
+
+RUNTIME 42 MS , MEMORY 61.05 MB
+
+
+    public long kthLargestLevelSum(TreeNode root, int k) 
+    {
+        ArrayList<Long> result = new ArrayList<>();  
+        Queue<TreeNode> que = new LinkedList<>();  
+        que.add(root);  
+
+        while(!que.isEmpty()) 
+        {
+            int n = que.size(); 
+            long sum = 0;  
+            
+            for(int i = 0; i < n; i++) 
+            {
+                TreeNode node = que.poll();
+                sum += node.val;
+                
+                if(node.left != null) que.add(node.left);
+
+                if(node.right != null) que.add(node.right);
+
+            }
+
+            result.add(sum);  
+
+        }
+
+        if(k > result.size()) return -1;
+        
+        result.sort(Collections.reverseOrder());  
+        return result.get(k - 1);  
+        
+    }
+
+
+    */
+
+}
