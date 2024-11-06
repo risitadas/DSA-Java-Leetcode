@@ -1,0 +1,39 @@
+class Solution {
+    public boolean canSortArray(int[] nums) 
+    {
+
+        int prev_setBits = 0;
+        int prevMax = Integer.MIN_VALUE; 
+        int currMax = Integer.MIN_VALUE; 
+        int currMin = Integer.MAX_VALUE; 
+
+        for(int num : nums) 
+        {
+            int setBits = Integer.bitCount(num);
+
+            if(setBits != prev_setBits) 
+            { 
+                if(prevMax > currMin)
+                {
+                    return false;
+                }
+            
+                prev_setBits = setBits;
+                prevMax = currMax;
+                currMax = num;
+                currMin = num;
+            } 
+            else
+            { 
+                currMax = Math.max(currMax, num);
+                currMin = Math.min(currMin, num);
+            }
+
+
+        }
+
+        return prevMax <= currMin;
+
+        
+    }
+}
