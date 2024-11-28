@@ -1,0 +1,28 @@
+class Solution {
+    public long maxMatrixSum(int[][] matrix) 
+    {
+
+        long absSum = 0;
+        long minAbs = Integer.MAX_VALUE;
+        int odd = 0;
+
+        for(int[] row : matrix)
+        {
+            for(int num : row)
+            {
+                absSum += Math.abs(num);
+                minAbs = Math.min(minAbs, Math.abs(num));
+
+                if(num <0)
+                {
+                    odd = odd^1;
+
+                }
+            }
+        }
+
+        return absSum - odd * minAbs * 2;
+
+        
+    }
+}
