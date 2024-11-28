@@ -1,0 +1,66 @@
+class Solution {
+    public int minimumObstacles(int[][] grid) 
+    {
+
+        int rows = grid.length; // m
+        int cols = grid[0].length; // n
+
+        int[][] visited = new int[rows][cols];
+
+        for(int[] row : visited)
+        {
+            Arrays.fill(row, Integer.MAX_VALUE);
+
+        }
+
+        int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        Deque<int[]> que = new ArrayDeque<>();
+        que.addFirst(new int[] {0, 0, 0});
+
+        visited[0][0] = 0;
+
+        while(!que.isEmpty())
+        {
+            int[] curr = que.pollFirst();
+            int x = curr[0];
+            int y = curr[1];
+            int cost = curr[2];
+
+            for(int[] d : dirs)
+            {
+                int nextX = x + d[0];
+                int nextY = y + d[1];
+
+                if(nextX >= 0 && nextX < rows && nextY >= 0 && nextY < cols)
+                {
+                    int nextCost = cost + grid[nextX][nextY];
+
+                    if(nextCost < visited[nextX][nextY])
+                    {
+                        visited[nextX][nextY] = nextCost;
+
+                        if(grid[nextX][nextY] == 0)
+                        {
+                            que.addFirst(new int[] {nextX, nextY, nextCost});
+
+                        }
+                        else
+                        {
+                            que.addLast(new int[] {nextX, nextY, nextCost});
+                        }
+
+
+                    }
+
+                }
+            }
+
+
+        }
+
+        return visited[rows-1][cols-1];
+
+
+    }
+}
