@@ -1,0 +1,57 @@
+class Solution {
+    public int maxTwoEvents(int[][] events) 
+    {
+        int n = events.length;
+
+        Arrays.sort(events, (a,b) -> a[0] - b[0]);
+
+        int[] suffixMax = new int[n];
+        suffixMax[n-1] = events[n-1][2];
+
+        for(int i=n-2; i>=0; i--)
+        {
+            suffixMax[i] = Math.max(events[i][2], suffixMax[i+1]);
+
+        }
+
+        int maxSum = 0;
+
+        for(int i=0;i<n; i++)
+        {
+            int start = i+1, end = n-1;
+            int curr = -1;  // next event index
+
+            while(start <= end)
+            {
+                int mid = start + (end - start)/2;
+
+                if(events[mid][0] > events[i][1])
+                {
+                    curr = mid;
+                    end = mid-1;
+
+                }
+                else
+                {
+                    start = mid+1;
+
+                }
+            }
+
+            if(curr !=-1)
+            {
+                maxSum = Math.max(maxSum, events[i][2] + suffixMax[curr]);
+
+            }
+
+            maxSum = Math.max(maxSum, events[i][2]);
+
+
+
+        }
+
+        return maxSum;
+
+        
+    }
+}
