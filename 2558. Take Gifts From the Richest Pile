@@ -1,0 +1,54 @@
+class Solution {
+    public long pickGifts(int[] gifts, int k) 
+    {
+
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        for(int i : gifts) 
+        {
+            maxHeap.offer(i);
+        }
+
+        while(k > 0) 
+        {
+            int cur = maxHeap.poll();
+            maxHeap.offer((int)Math.sqrt(cur));
+            k--;
+        }
+
+        long result = 0;
+        for(int i : maxHeap) 
+        {
+            result += i;
+        }
+        return result;
+
+        /*
+
+        RUNTIME 6 MS, MEMORY 42.82 MB
+
+        long result = 0;
+        Queue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+        for(int gift : gifts)
+        {
+            maxHeap.offer(gift);
+        }
+
+        for(int i = 0; i < k; i++) 
+        {
+            int squaredMax = (int) Math.sqrt(maxHeap.poll());
+            maxHeap.offer(squaredMax);
+        }
+
+        while(!maxHeap.isEmpty())
+        {
+            result += maxHeap.poll();
+        }
+
+        return result;
+
+        */
+
+        
+    }
+}
