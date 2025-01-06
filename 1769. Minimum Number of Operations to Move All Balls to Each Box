@@ -1,0 +1,46 @@
+class Solution {
+    public int[] minOperations(String boxes)
+    {
+
+        int n = boxes.length();
+        int[] intBox = new int[n]; 
+
+        for(int i=0; i<n; i++)
+        {
+            intBox[i] = boxes.charAt(i) - '0';
+
+        }
+
+        int[] result = new int[n];
+        int count=0, cumulativeSum = 0;
+
+        for(int i = 0; i < n; i++)  // left to right pass moving count
+        {
+            result[i] += cumulativeSum;
+            count += intBox[i];
+            cumulativeSum += count;
+
+        }
+
+
+        count=0; cumulativeSum=0;
+        for(int i = n - 1; i >= 0; i--)  // right to left pass moving count
+        {
+            result[i] += cumulativeSum;
+            count += intBox[i];
+            cumulativeSum += count;
+
+        }
+
+        return result;
+
+
+
+
+
+
+
+
+        
+    }
+}
