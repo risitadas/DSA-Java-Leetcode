@@ -1,0 +1,63 @@
+class Solution 
+{
+    public static boolean func(String[] words, String curr, int index)  // index here is the index to be excluded
+    {
+        for(int i = 0; i < words.length; i++) 
+        {
+            if(i == index) continue;
+
+            String other = words[i];
+            if (other.contains(curr)) 
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public List<String> stringMatching(String[] words) 
+    {
+
+        ArrayList<String> result = new ArrayList<>();
+
+        for(int i = 0; i < words.length; i++) 
+        {
+            String curr = words[i];
+
+            if(func(words, curr, i)) 
+            {
+                result.add(curr);
+            } 
+        }
+
+        return result;
+
+
+
+
+        /* RUNTIME 4 MS , MEMORY 42.65 MB
+
+        ArrayList<String> result = new ArrayList<>();
+
+        for(String a : words)
+        {
+            for(String b : words)
+            {
+                if(a.length() < b.length() && b.indexOf(a) != -1) 
+                {
+                    result.add(a);
+                    break;
+                }
+
+            }
+
+        }
+        
+        return result;
+
+        */
+
+        
+    }
+}
