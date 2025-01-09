@@ -1,0 +1,75 @@
+class Solution {
+
+    public int countPrefixSuffixPairs(String[] words) 
+    {
+        int n = words.length;
+        int count = 0;
+
+        for(int i = 0; i < n; i++)
+        {
+            String prefix = words[i];
+            String suffix = words[i];
+
+            for(int j = i + 1; j < n; j++)
+            {
+                if(words[j].startsWith(prefix) && words[j].endsWith(suffix))
+                {
+                    count++;
+
+                }
+
+            }
+        }
+
+        return count;
+
+        
+    }
+
+
+
+
+
+/* RUNTIME 3 MS, MEMORY 44.24 MB
+
+
+    public int countPrefixSuffixPairs(String[] words) 
+    {
+
+        int n = words.length;
+        int count = 0;
+
+        for(int i=0; i<n; i++)
+        {
+            for(int j=i+1; j<n; j++)
+            {
+                if(verifyPrefixSuffix(words[i], words[j]))
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+
+        
+    }
+
+    public boolean verifyPrefixSuffix(String s1, String s2)
+    {
+        int m = s1.length(), n = s2.length();
+
+        if(m > n)
+        {
+            return false;
+        }
+
+        return s2.substring(0, m).equals(s1) && s2.substring(n - m).equals(s1);
+
+
+    }
+
+
+*/
+
+}
