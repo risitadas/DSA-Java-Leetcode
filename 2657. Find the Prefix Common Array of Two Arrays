@@ -1,0 +1,32 @@
+class Solution {
+    public int[] findThePrefixCommonArray(int[] A, int[] B) 
+    {
+
+        int n = A.length;
+        int prefixCommon = 0;
+        int[] result = new int[n];
+        int[] count = new int[n + 1];
+
+        for(int i = 0; i <n;i++) 
+        {
+            if(++count[A[i]] == 2)
+            {
+                prefixCommon++;
+
+            }
+
+            if(++count[B[i]] == 2)
+            {
+                prefixCommon++;
+
+            }
+
+            result[i] = prefixCommon;
+        }
+
+        return result;
+
+        
+
+    }
+}
